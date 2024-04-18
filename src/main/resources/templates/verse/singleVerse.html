@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:fragment="verse(poem)">
-    <a href="#">
+    <a th:href="@{/verse/{id}(id=${poem.id})}">
         <div class="tile">
             <div class="image-container">
                 <img th:src="${poem.imageUrl}" alt="Obrazek do wiersza"/>
