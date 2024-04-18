@@ -1,0 +1,60 @@
+
+.tile {
+    width: 440px;
+    display: flex;
+    height: 180px;
+    align-items: center;
+    margin: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.image-container {
+    width: 33%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.text-container {
+    width: 67%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.poem {
+    font-style: italic;
+    color: #555;
+    white-space: pre-wrap;
+    margin: 0 0 15px 0;
+}
+
+.text {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.tile:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    background-color: #eaeaea;
+    border-color: #363062;
+}
