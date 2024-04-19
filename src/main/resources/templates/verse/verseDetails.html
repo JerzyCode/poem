@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <link rel="stylesheet" th:href="@{/css/verse/verseDetails.css}">
+    <meta charset="UTF-8">
+    <title th:text="${verse.title}"></title>
+</head>
+<body>
+<div th:replace="~{shared/header}"></div>
+<div class="content-wrapper">
+    <div class="verse-details-body">
+        <div class="verse-container">
+            <div class="text-container">
+                <h1 th:text="${verse.title}"></h1>
+                <div class="poem-text">
+                    <p th:utext="${verse.text}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

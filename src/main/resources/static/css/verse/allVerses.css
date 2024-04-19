@@ -1,0 +1,38 @@
+body {
+    height: fit-content;
+    background-color: #f4f4f9;
+}
+
+.all-verses {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+}
+
+.add-button-container {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #363062;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #564e96;
+    transform: scale(1.2);
+}

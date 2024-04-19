@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/verse/verse.css}">
+    <link rel="stylesheet" th:href="@{/css/verse/allVerses.css}">
+    <title>All Verses</title>
+</head>
+<body>
+<div th:replace="~{shared/header}"></div>
+<div id="verseList" class="all-verses" th:each="verse: ${verses}">
+    <div class="single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></div>
+</div>
+<div id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
+</div>
+<div id="add-verse-button" class="add-button-container">
+    <a href="#" class="add-button" onclick="">+</a>
+</div>
+<script th:src="@{/js/verse/allVerses.js}"></script>
+<script th:src="@{/js/verse/addVersePopup.js}"></script>
+
+</body>
+</html>
