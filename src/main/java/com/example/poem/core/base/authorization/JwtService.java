@@ -1,6 +1,6 @@
 package com.example.poem.core.base.authorization;
 
-import com.example.poem.core.user.User;
+import com.example.poem.core.models.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

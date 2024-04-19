@@ -1,4 +1,4 @@
-package com.example.poem.core.config;
+package com.example.poem.core.base.config;
 
 import com.example.poem.core.base.authorization.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;

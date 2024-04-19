@@ -1,6 +1,6 @@
-package com.example.poem.core.config;
+package com.example.poem.core.base.config;
 
-import com.example.poem.core.user.UserRepository;
+import com.example.poem.core.models.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

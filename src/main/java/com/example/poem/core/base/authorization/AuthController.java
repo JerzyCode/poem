@@ -3,7 +3,7 @@ package com.example.poem.core.base.authorization;
 import com.example.poem.core.base.authorization.dto.AuthRequest;
 import com.example.poem.core.base.authorization.dto.AuthenticationResponse;
 import com.example.poem.core.base.exceptions.UsernameTakenException;
-import com.example.poem.core.user.UserService;
+import com.example.poem.core.models.user.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

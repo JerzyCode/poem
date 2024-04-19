@@ -1,4 +1,4 @@
-package com.example.poem.core.user;
+package com.example.poem.core.models.user;
 
 import com.example.poem.core.base.authorization.JwtService;
 import com.example.poem.core.base.authorization.dto.AuthRequest;

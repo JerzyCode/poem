@@ -1,4 +1,4 @@
-package com.example.poem.core.verse;
+package com.example.poem.core.models.verse;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
