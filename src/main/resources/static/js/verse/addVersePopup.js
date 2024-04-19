@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', function () {
+    var closeButton = document.getElementById('closeButton');
+    if (closeButton) {
+        closeButton.addEventListener('click', closePopup);
+    }
+
+    var submitButton = document.getElementById('submitButton');
+    if (submitButton) {
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            submitForm();
+        });
+    }
+});
+
 function closePopup() {
     document.getElementById('popupForm').style.display = 'none';
 }
@@ -33,29 +48,8 @@ function submitForm() {
         })
         .catch((error) => {
             console.error('Error:', error);
+            form.reset();
         });
 
     closePopup();
-}
-
-function addVerseToList(poem) {
-    const verseHtml = `
-        <a href="/verse/${poem.id}">
-            <div class="tile">
-                <div class="image-container">
-                    <img src="${poem.imageUrl}" alt="Obrazek do wiersza"/>
-                </div>
-                <div class="text-container">
-                    <h1 class="title">${poem.title}</h1>
-                    <p class="poem">${poem.shortDescription}</p>
-                </div>
-            </div>
-        </a>
-    `;
-
-    const container = document.getElementsByClassName('single-verse');
-    const div = document.createElement('div');
-    div.innerHTML = verseHtml;
-    container.insertBefore(div, container);
-
 }

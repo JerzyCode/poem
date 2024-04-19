@@ -14,3 +14,18 @@ spring:
     mode: HTML
     encoding: UTF-8
     cache: false
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+---
+
+spring:
+  config:
+    activate:
+      on-profile: mock
+  security:
+    user:
+      name: user
+      password: pass
