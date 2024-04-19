@@ -20,7 +20,7 @@ public class DevConfig {
   @Bean
   @Profile("mock")
   public CommandLineRunner createMocks() {
-    System.out.println("Create Mocks");
+    log.info("Created Mocks!");
 
     List<Verse> verseList = List.of(
         Verse.builder()
