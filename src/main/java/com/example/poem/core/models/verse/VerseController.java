@@ -8,19 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/verse")
 public class VerseController {
 
   private final VerseRepository repository;
   private final VerseService service;
 
-  @GetMapping
+  @GetMapping("/verse")
   public String getAllVerses(Model model) {
     model.addAttribute("verses", repository.findAll());
     return "verse/allVerses";
   }
 
-  @GetMapping("{id}")
+  @GetMapping("/verse{id}")
   public String getVerse(Model model, @PathVariable Long id) {
     Verse verse = service.getVerse(id);
     model.addAttribute("verse", verse);

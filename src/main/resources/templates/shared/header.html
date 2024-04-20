@@ -1,4 +1,4 @@
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/shared/header.css}"/>
     <title></title>
@@ -10,8 +10,9 @@
         </a>
         <nav>
             <ul class="nav-links">
-                <li><a href="/verse">Login</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/signup">Sign Up</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </div>
