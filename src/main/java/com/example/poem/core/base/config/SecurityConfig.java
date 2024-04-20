@@ -1,6 +1,6 @@
 package com.example.poem.core.base.config;
 
-import com.example.poem.core.models.user.CustomUserDetailsService;
+import com.example.poem.core.service.CustomUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

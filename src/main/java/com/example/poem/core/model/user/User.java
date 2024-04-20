@@ -1,4 +1,4 @@
-package com.example.poem.core.models.user;
+package com.example.poem.core.model.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,9 @@
-package com.example.poem.core.models.user;
+package com.example.poem.core.controller;
 
 import com.example.poem.core.base.exceptions.UsernameTakenException;
+import com.example.poem.core.model.user.User;
+import com.example.poem.core.model.user.UserRole;
+import com.example.poem.core.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

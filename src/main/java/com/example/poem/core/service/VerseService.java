@@ -1,5 +1,8 @@
-package com.example.poem.core.models.verse;
+package com.example.poem.core.service;
 
+import com.example.poem.core.model.verse.Verse;
+import com.example.poem.core.model.verse.VerseDTO;
+import com.example.poem.core.model.verse.VerseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

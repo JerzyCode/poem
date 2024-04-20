@@ -1,4 +1,4 @@
-package com.example.poem.core.base;
+package com.example.poem.core.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.example.poem.core.models.verse;
+package com.example.poem.core.model.verse;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

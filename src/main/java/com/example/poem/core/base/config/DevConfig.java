@@ -1,7 +1,7 @@
 package com.example.poem.core.base.config;
 
-import com.example.poem.core.models.verse.Verse;
-import com.example.poem.core.models.verse.VerseRepository;
+import com.example.poem.core.model.verse.Verse;
+import com.example.poem.core.model.verse.VerseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
