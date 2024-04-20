@@ -27,7 +27,7 @@ public class VerseController {
     return "verse/verseDetails";
   }
 
-  @PostMapping
+  @PostMapping("/rest/api/verse")
   public ResponseEntity<Verse> addVerse(@RequestBody VerseDTO verseDTO) {
     Verse verse = service.addVerse(verseDTO);
     return ResponseEntity.ok(verse);

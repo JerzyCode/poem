@@ -34,18 +34,16 @@ function submitForm() {
     };
     console.log(formData)
 
-    fetch('/verse', {
+    fetch('/rest/api/verse', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
+    }).then(() => {
+        location.reload()
+        form.reset();
     })
-        .then(response => response.json())
-        .then(() => {
-            location.reload()
-            form.reset();
-        })
         .catch((error) => {
             console.error('Error:', error);
             form.reset();

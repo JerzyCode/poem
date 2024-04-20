@@ -39,6 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String username;
     if (authHeader == null || !authHeader.startsWith(BEARER)) {
       filterChain.doFilter(request, response);
+      log.info("NOT AUTHENTICATED");
       return;
     }
     jwtToken = authHeader.substring(TOKEN_START_INDEX);
