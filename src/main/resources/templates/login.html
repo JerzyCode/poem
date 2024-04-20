@@ -8,8 +8,14 @@
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
+<div th:if="${param.success}">
+    You successfully registered. Please use your credentials to log in.
+</div>
+<div th:if="${param.error}">
+    Login or password incorrect.
+</div>
 <div class="signup-container">
-    <form id="loginForm" class="signup-form" onsubmit="return false;">
+    <form id="loginForm" class="signup-form" th:action="@{/login}" method="post">
         <h2>Login</h2>
         <div class="input-group">
             <label for="username">Username:</label>
@@ -20,7 +26,7 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div class="input-group">
-            <button id="submit-button" type="submit">Login</button>
+            <input class="submit-button" type="submit" value="Login">
         </div>
     </form>
 </div>

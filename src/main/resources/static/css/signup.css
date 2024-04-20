@@ -35,7 +35,8 @@
     border-radius: 4px;
 }
 
-button {
+
+.submit-button {
     background-color: #363062;
     color: white;
     padding: 10px 15px;
@@ -45,7 +46,7 @@ button {
     transition: background-color 0.3s;
 }
 
-button:hover {
+.submit-button:hover {
     background-color: #4a54e1;
     transform: scale(1.03);
 }

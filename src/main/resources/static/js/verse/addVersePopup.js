@@ -32,7 +32,6 @@ function submitForm() {
         text: form.text.value,
         imageUrl: form.imageUrl.value
     };
-    console.log(formData)
 
     fetch('/rest/api/verse', {
         method: 'POST',
