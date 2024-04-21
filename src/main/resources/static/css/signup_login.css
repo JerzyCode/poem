@@ -5,10 +5,20 @@
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 80vh;
 
+}
+
+.register-fail {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: red;
+    padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .signup-form {
@@ -24,6 +34,24 @@
 .input-group label {
     display: block;
     margin-bottom: 5px;
+}
+
+.register-success {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: green;
+    padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-fail {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: red;
+    padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .input-group input[type="text"],

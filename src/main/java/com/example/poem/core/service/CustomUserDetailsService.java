@@ -1,6 +1,5 @@
 package com.example.poem.core.service;
 
-import com.example.poem.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -5,10 +5,12 @@ import com.example.poem.core.model.verse.VerseDTO;
 import com.example.poem.core.model.verse.VerseRepository;
 import com.example.poem.core.service.VerseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,9 +33,9 @@ public class VerseController {
   }
 
   @PostMapping("/rest/api/verse")
-  public ResponseEntity<Verse> addVerse(@RequestBody VerseDTO verseDTO) {
-    Verse verse = service.addVerse(verseDTO);
-    return ResponseEntity.ok(verse);
+  public String addVerse(@ModelAttribute VerseDTO verseDTO) {
+    service.addVerse(verseDTO);
+    return "redirect:/verse";
   }
 
 }

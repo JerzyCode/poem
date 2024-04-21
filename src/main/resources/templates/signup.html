@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" th:href="@{/css/signup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/signup_login.css}"/>
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
-<div th:if="${param.fail}">
-    Can't register, username taken or wrong name.
-</div>
 <div class="signup-container">
+    <div class="register-fail" th:if="${param.fail}">
+        Can't register, username taken or password less than 8 characters.
+    </div>
     <form id="signUpForm" class="signup-form" th:action="@{/signup}" method="post" th:object="${user}">
         <h2>Sign Up</h2>
         <div class="input-group">

@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet" th:href="@{/css/signup_login.css}"/>
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
-<div th:if="${param.success}">
-    You successfully registered. Please use your credentials to log in.
-</div>
-<div th:if="${param.error}">
-    Login or password incorrect.
-</div>
 <div class="signup-container">
+    <div class="register-success" th:if="${param.success}">
+        You successfully registered. Please use your credentials to log in.
+    </div>
+    <div class="login-fail" th:if="${param.error}">
+        Login or password incorrect.
+    </div>
     <form id="loginForm" class="signup-form" th:action="@{/login}" method="post">
         <h2>Login</h2>
         <div class="input-group">
@@ -30,6 +30,5 @@
         </div>
     </form>
 </div>
-<!--<script th:src="@{/js/login.js}"></script>-->
 </body>
 </html>

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +21,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig {
+
   private static final String[] ALLOWED_URLS = {
       "/h2-console/**",
       "/home",
       "/signup",
-      "/login",
+      "/login/**",
       //      "/verse/**",
       "/css/**",
       "/images/**",
@@ -39,7 +41,8 @@ public class SecurityConfig {
             .requestMatchers(ALLOWED_URLS).permitAll()
             .anyRequest().authenticated())
         .formLogin(formLogin -> formLogin.loginPage("/login").permitAll()
-            .defaultSuccessUrl("/home", true))
+            .defaultSuccessUrl("/home", true)
+            .failureUrl("/login?error"))
         .logout(LogoutConfigurer::permitAll)
         .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
         .build();
@@ -56,9 +59,17 @@ public class SecurityConfig {
   }
 
   @Bean
+  public DaoAuthenticationProvider authProvider() {
+    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+    authProvider.setUserDetailsService(userDetailsService());
+    authProvider.setPasswordEncoder(passwordEncoder());
+    return authProvider;
+  }
+
+  @Bean
   public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-    AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-    authenticationManagerBuilder.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+    AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class)
+        .authenticationProvider(authProvider());
     return authenticationManagerBuilder.build();
   }
 

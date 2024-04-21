@@ -24,20 +24,17 @@ public class UserController {
 
   @GetMapping("/signup")
   public String getSignUpPage(Model model) {
-    System.out.println("getSignUpPage");
     model.addAttribute("user", new User());
     return "signup";
   }
 
   @PostMapping("/signup")
   public String signUpUser(@ModelAttribute User user) {
-    System.out.println("signUpUser");
     user.setRole(UserRole.USER);
     try {
       service.register(user);
     }
     catch (UsernameTakenException e) {
-      // TODO tutaj zrobic zeby komunikat wyświetlić że jest już tkai user
       return "redirect:/signup?fail";
     }
     return "redirect:/login?success";
