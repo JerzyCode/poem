@@ -9,7 +9,9 @@
 <div id="popupForm" class="popup-overlay">
     <div class="popup-content">
         <h2>Add New Verse</h2>
-        <form id="verseForm" th:action="@{/rest/api/verse}" method="post" th:object="${verseDTO}">
+        <form id="verseForm"
+              th:action="@{/rest/api/verse(userId=${#authorization.getAuthentication().getPrincipal().getId()})}"
+              method="post" th:object="${verseDTO}">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required><br>
 

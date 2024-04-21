@@ -11,42 +11,51 @@ a {
 
 .header-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     background: linear-gradient(to right, #4D4C7D 0%, #363062 100%);
     color: #F5F5F5;
     padding: 10px 20px;
 }
 
-.logo {
+.head-nav {
     margin: 15px 10px 15px 20px;
     font-size: 24px;
 }
 
+.poems-nav {
+    font-weight: normal;
+    font-size: 18px;
+    margin: 15px 10px 15px 20px;
+}
+
+.left-nav {
+    align-items: center;
+    display: flex;
+}
+
 .nav-links {
-    margin: 15px 20px 15px 10px;
     list-style-type: none;
     padding: 0;
+    display: flex;
+    margin: 15px 20px 15px 10px;
 }
+
 
 .nav-links li {
     display: inline;
     margin-left: 20px;
 }
 
+
 .nav-links a {
-    text-decoration: none;
     font-size: 18px;
 }
 
-.nav-links a:hover {
+.nav-links a:hover, .poems-nav:hover, .head-nav:hover {
     color: #F99417;
 }
 
-.logo:hover {
-    color: #F99417;
-
-}
 
 @media (max-width: 600px) {
     .header-container {

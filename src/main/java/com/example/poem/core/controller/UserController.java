@@ -1,6 +1,5 @@
 package com.example.poem.core.controller;
 
-import com.example.poem.core.base.exceptions.UsernameTakenException;
 import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRole;
 import com.example.poem.core.service.UserService;
@@ -34,7 +33,7 @@ public class UserController {
     try {
       service.register(user);
     }
-    catch (UsernameTakenException e) {
+    catch (Exception e) {
       return "redirect:/signup?fail";
     }
     return "redirect:/login?success";

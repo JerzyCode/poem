@@ -17,14 +17,15 @@ public class UserService {
 
   private final UserRepository repository;
 
-  public void register(User user) throws UsernameTakenException {
+  public User register(User user) throws UsernameTakenException {
     boolean existUser = repository.findUserByUsername(user.getUsername()).isPresent();
+    System.out.println(user.toString());
     if (existUser) {
       throw new UsernameTakenException(USER_NAME_TAKEN);
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setRole(UserRole.USER);
-    repository.save(user);
+    return repository.save(user);
   }
 
   public User findByUsername(String username) {

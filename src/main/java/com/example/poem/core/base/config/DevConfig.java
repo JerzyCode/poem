@@ -26,8 +26,10 @@ public class DevConfig {
   @Profile("mock")
   public CommandLineRunner createMocks() throws UsernameTakenException {
     log.info("Created Mocks!");
-    service.register(User.builder()
+    User user = service.register(User.builder()
         .username("test@wp.pl")
+        .name("Jerzy")
+        .surname("Boksa")
         .password("test123")
         .role(UserRole.USER)
         .build());
@@ -42,6 +44,7 @@ public class DevConfig {
             .title("Do Hanny")
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
+            .user(user)
             .build(),
         Verse.builder()
             .text("Wiesz, coś mi winien; mieగże się do taszki⁸,\n" +
@@ -49,6 +52,7 @@ public class DevConfig {
             .title("Do Jósta")
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
+            .user(user)
             .build()
     );
 

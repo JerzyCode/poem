@@ -1,6 +1,7 @@
 package com.example.poem.core.model.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Setter
 @Table(name = User.TABLE_NAME)
 public class User implements UserDetails {
@@ -26,9 +28,17 @@ public class User implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "username")
   @Size(max = 128)
   @NotNull
+  private String name;
+
+  @Size(max = 128)
+  @NotNull
+  private String surname;
+
+  @Size(max = 128)
+  @NotNull
+  @Email
   private String username;
 
   @Column(name = "password")

@@ -1,5 +1,6 @@
 package com.example.poem.core.model.verse;
 
+import com.example.poem.core.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -18,6 +19,11 @@ public class Verse {
   private Long id;
 
   @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  @NotNull
   private String title;
 
   @NotNull
@@ -27,4 +33,5 @@ public class Verse {
   private String text;
 
   private String imageUrl;
+
 }

@@ -58,3 +58,17 @@
     background-color: #eaeaea;
     border-color: #363062;
 }
+
+.author-credentials {
+    display: flex;
+}
+
+.author-p {
+    color: #333;
+    margin-right: 10px;
+    text-decoration: none
+}
+
+.author-p:last-child {
+    margin-right: 0;
+}

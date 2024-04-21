@@ -10,12 +10,20 @@
 <div th:replace="~{shared/header}"></div>
 <div class="signup-container">
     <div class="register-fail" th:if="${param.fail}">
-        Can't register, username taken or password less than 8 characters.
+        Can't register, username taken, wrong email or password is less than 8 characters.
     </div>
     <form id="signUpForm" class="signup-form" th:action="@{/signup}" method="post" th:object="${user}">
         <h2>Sign Up</h2>
         <div class="input-group">
-            <label for="username">Username:</label>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="input-group">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+        </div>
+        <div class="input-group">
+            <label for="username">Email:</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div class="input-group">

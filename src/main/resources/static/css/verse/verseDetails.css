@@ -23,6 +23,9 @@
     align-items: center;
 }
 
+.poem-text {
+    padding: 20px;
+}
 
 .text-container {
     width: 100%;
@@ -35,7 +38,7 @@
     color: #333;
 }
 
-.poem-text {
+.poem-box {
     background-color: #f9f9f9;
     padding: 20px;
     font-style: italic;
@@ -51,4 +54,20 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.author-credentials {
+    float: right;
+    display: flex;
+}
+
+.author-a {
+    color: #333;
+    margin-right: 5px;
+    text-decoration: none
+}
+
+.author-a:last-child {
+    margin-right: 0;
 }
