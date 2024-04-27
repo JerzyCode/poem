@@ -3,6 +3,8 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/verse/verseDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/verse/popups.css}">
+
     <meta charset="UTF-8">
     <title th:text="${verse.title}"></title>
 </head>
@@ -24,7 +26,19 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+<div id="popupForm" class="popup-overlay" th:replace="~{verse/deleteVersePopup :: verse(${verse})}">
+</div>
+
+<div class="action-buttons-container">
+    <div th:if="${verse.user.id == #authentication.getPrincipal().getId()}" class="head-container">
+        <button class="delete-verse-button" id="delete-verse-button">Delete Verse</button>
+    </div>
+</div>
+<script th:src="@{/js/verse/verseDetails.js}"></script>
+<script th:src="@{/js/verse/popups.js}"></script>
+
 </body>
 </html>

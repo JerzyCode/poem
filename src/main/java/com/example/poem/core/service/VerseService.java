@@ -40,4 +40,9 @@ public class VerseService {
         .build();
     return verseRepository.save(verse);
   }
+
+  public void deleteVerse(Long verseId) {
+    Verse verse = verseRepository.findById(verseId).orElseThrow();
+    verseRepository.delete(verse);
+  }
 }

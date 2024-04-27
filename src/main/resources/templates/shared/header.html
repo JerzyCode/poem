@@ -10,7 +10,7 @@
                 <h1 class="head-nav">Poem Blog</h1>
             </a>
             <a sec:authorize="isAuthenticated()"
-               th:href="@{/verses(userId=${#authorization.getAuthentication().getPrincipal().getId()})}">
+               th:href="@{/verses/{userId}(userId=${#authorization.getAuthentication().getPrincipal().getId()})}">
                 <h1 class="poems-nav">Your Poems</h1>
             </a>
         </div>

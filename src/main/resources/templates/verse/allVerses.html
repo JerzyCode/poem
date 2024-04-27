@@ -13,7 +13,7 @@
 </div>
 <div id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
 </div>
-<div id="add-verse-button" class="add-button-container">
+<div th:if="${userId == #authentication.getPrincipal().getId()}" id="add-verse-button" class="add-button-container">
     <a class="add-button">+</a>
 </div>
 <script th:src="@{/js/verse/allVerses.js}"></script>

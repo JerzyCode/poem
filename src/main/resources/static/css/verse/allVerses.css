@@ -35,4 +35,5 @@ body {
 .add-button:hover {
     background-color: #564e96;
     transform: scale(1.2);
+    cursor: pointer;
 }

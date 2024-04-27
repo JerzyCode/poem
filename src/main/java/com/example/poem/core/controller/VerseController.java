@@ -4,6 +4,7 @@ import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseDTO;
 import com.example.poem.core.service.VerseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,9 @@ public class VerseController {
     return "verse/allVerses";
   }
 
-  @GetMapping("/verses")
-  public String getVersesByUserId(Model model, @RequestParam Long userId) {
+  @GetMapping("/verses/{userId}")
+  public String getVersesByUserId(Model model, @PathVariable Long userId) {
+    model.addAttribute("userId", userId);
     model.addAttribute("verses", service.findAllByUserId(userId));
     return "verse/allVerses";
   }
@@ -36,7 +38,12 @@ public class VerseController {
   @PostMapping("/rest/api/verse")
   public String addVerse(@ModelAttribute VerseDTO verseDTO, @RequestParam Long userId) {
     service.addVerse(verseDTO, userId);
-    return String.format("redirect:/verses?userId=%d", userId);
+    return String.format("redirect:/verses/%d", userId);
   }
 
+  @DeleteMapping("/rest/api/verse")
+  public ResponseEntity<Void> deleteVerse(@RequestParam Long verseId) {
+    service.deleteVerse(verseId);
+    return ResponseEntity.ok().build();
+  }
 }

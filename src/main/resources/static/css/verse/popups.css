@@ -71,7 +71,22 @@ input[type="text"], textarea {
     transform: scale(1.05);
 }
 
+.delete-popup-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-delete-control-button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 label {
     font-family: 'Arial', sans-serif;
     color: #666;
+}
+
+.delete-header {
+    text-align: center;
 }

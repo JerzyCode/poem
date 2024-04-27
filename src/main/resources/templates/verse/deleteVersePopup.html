@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Verse</title>
+</head>
+<body>
+<div th:fragment="verse(poem)"></div>
+<div id="popupForm" class="popup-overlay" th:fragment="verse(poem)">
+    <div class="popup-content">
+        <h3 class="delete-header" th:text="'Are you sure you want to delete verse: ' + ${poem.title}"></h3>
+        <div class="delete-popup-buttons">
+            <button id="confirmDeleteButton" class="custom-button user-delete-control-button"
+                    th:data-verse-id="${poem.id}" th:data-user-id="${poem.user.id}" type="button">Confirm
+            </button>
+            <button id="closeButton" class="custom-button user-delete-control-button" type="button">Cancel</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

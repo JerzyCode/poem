@@ -71,3 +71,28 @@
 .author-a:last-child {
     margin-right: 0;
 }
+
+.action-buttons-container {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
+.delete-verse-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #363062;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+}
+
+.delete-verse-button:hover {
+    background-color: #564e96;
+    transform: scale(1.2);
+    cursor: pointer;
+}
