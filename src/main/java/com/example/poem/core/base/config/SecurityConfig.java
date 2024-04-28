@@ -10,12 +10,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +44,12 @@ public class SecurityConfig {
             .defaultSuccessUrl("/home", true)
             .failureUrl("/login?error"))
         .logout(LogoutConfigurer::permitAll)
-        .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+        .headers(headers ->
+            headers.xssProtection(
+                xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
+            ).contentSecurityPolicy(
+                cps -> cps.policyDirectives("script-src 'self'")
+            ))
         .build();
   }
 

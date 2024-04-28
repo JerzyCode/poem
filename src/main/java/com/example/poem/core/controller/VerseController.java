@@ -17,7 +17,7 @@ public class VerseController {
 
   @GetMapping("/verse")
   public String getAllVerses(Model model) {
-//    model.addAttribute("verses", service.findAll());
+    //    model.addAttribute("verses", service.findAll());
     return "verse/allVerses";
   }
 
