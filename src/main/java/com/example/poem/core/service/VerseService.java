@@ -8,6 +8,8 @@ import com.example.poem.core.model.verse.VerseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -20,8 +22,16 @@ public class VerseService {
     return verseRepository.findById(id).orElseThrow();
   }
 
-  public List<Verse> findAll() {
-    return verseRepository.findAll();
+  public List<Verse> findRandomVerses() {
+    List<Verse> verses = verseRepository.findAll();
+    Collections.shuffle(verses);
+    int numOfVerses = verses.size();
+    return switch (numOfVerses) {
+      case 0 -> new ArrayList<>();
+      case 1 -> List.of(verses.get(0));
+      case 2 -> verses.subList(0, 2);
+      default -> verses.subList(0, 3);
+    };
   }
 
   public List<Verse> findAllByUserId(Long userId) {

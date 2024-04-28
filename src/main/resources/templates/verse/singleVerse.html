@@ -7,13 +7,16 @@
 <body>
 <div th:fragment="verse(poem)">
     <a th:href="@{/verse/{id}(id=${poem.id})}" class="tile">
-        <div th:if="${poem.imageUrl != null and !poem.imageUrl.isEmpty()}" class="image-container">
-            <img th:src="${'/'+poem.imageUrl}" alt="Obrazek do wiersza"/>
+        <div class="image-container">
+            <img th:if="${poem.imageUrl != null and !poem.imageUrl.isEmpty()}" th:src="${'/'+poem.imageUrl}"
+                 alt="Obrazek do wiersza"/>
+            <img th:if="${poem.imageUrl == null or poem.imageUrl.isEmpty()}" th:src="${'images/image_not_found.jpg'}"
+                 alt="Obrazek do wiersza"/>
         </div>
-        <div class="text-container">
-            <h1 class="title" th:text="${poem.title}"></h1>
-            <p class="poem" th:utext="${poem.shortDescription}"></p>
-            <div    class="author-credentials">
+        <div class="verse-text-container">
+            <h1 class="verse-title" th:text="${poem.title}"></h1>
+            <p class="verse-description" th:utext="${poem.shortDescription}"></p>
+            <div class="author-credentials">
                 <p class="author-p" th:text="${poem.user.getName()}"></p>
                 <p class="author-p" th:text="${poem.user.getSurname()}"></p>
             </div>

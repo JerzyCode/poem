@@ -8,9 +8,12 @@
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
-<div id="verseList" class="all-verses" th:each="verse: ${verses}">
-    <div class="single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></div>
+<div class="verses-row">
+    <div id="verseList" class="all-verses" th:each="verse: ${verses}">
+        <div class="single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></div>
+    </div>
 </div>
+
 <div id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
 </div>
 <div th:if="${userId == #authentication.getPrincipal().getId()}" id="add-verse-button" class="add-button-container">

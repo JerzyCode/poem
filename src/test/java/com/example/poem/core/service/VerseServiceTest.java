@@ -143,7 +143,57 @@ class VerseServiceTest {
         .hasTitle(verse2.getTitle())
         .hasId(verse2.getId())
         .hasShortDescription(verse2.getShortDescription());
+  }
 
+  @Test
+  void find_random_verse_should_return_zero() {
+    //given
+    //when
+    List<Verse> verses = sut.findRandomVerses();
+    //then
+    ListAssert.assertThatList(verses)
+        .isNotNull()
+        .hasSize(0);
+  }
+
+  @Test
+  void find_random_verse_should_return_one() {
+    //given
+    verseRepository.save(VerseHelper.prepareVerse(user));
+    //when
+    List<Verse> verses = sut.findRandomVerses();
+    //then
+    ListAssert.assertThatList(verses)
+        .isNotNull()
+        .hasSize(1);
+  }
+
+  @Test
+  void find_random_verse_should_return_two() {
+    //given
+    verseRepository.save(VerseHelper.prepareVerse(user));
+    verseRepository.save(VerseHelper.prepareVerse(user));
+    //when
+    List<Verse> verses = sut.findRandomVerses();
+    //then
+    ListAssert.assertThatList(verses)
+        .isNotNull()
+        .hasSize(2);
+  }
+
+  @Test
+  void find_random_verse_should_return_three() {
+    //given
+    verseRepository.save(VerseHelper.prepareVerse(user));
+    verseRepository.save(VerseHelper.prepareVerse(user));
+    verseRepository.save(VerseHelper.prepareVerse(user));
+
+    //when
+    List<Verse> verses = sut.findRandomVerses();
+    //then
+    ListAssert.assertThatList(verses)
+        .isNotNull()
+        .hasSize(3);
   }
 
   User createUser() {

@@ -17,6 +17,19 @@ body {
     bottom: 20px;
 }
 
+.single-verse {
+
+}
+
+.verses-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
 .add-button {
     display: flex;
     align-items: center;

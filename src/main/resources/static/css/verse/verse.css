@@ -30,7 +30,7 @@
     border-bottom-left-radius: 8px;
 }
 
-.text-container {
+.verse-text-container {
     width: 67%;
     height: 100%;
     display: flex;
@@ -40,7 +40,7 @@
 }
 
 
-.poem {
+.verse-description {
     font-style: italic;
     color: #555;
     white-space: pre-wrap;

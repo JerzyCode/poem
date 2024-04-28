@@ -15,10 +15,10 @@ public class VerseController {
 
   private final VerseService service;
 
-  @GetMapping("/verse")
-  public String getAllVerses(Model model) {
-    //    model.addAttribute("verses", service.findAll());
-    return "verse/allVerses";
+  @GetMapping("/home")
+  public String getRandomVersesHome(Model model) {
+    model.addAttribute("verses", service.findRandomVerses());
+    return "home";
   }
 
   @GetMapping("/verses/{userId}")

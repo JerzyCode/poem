@@ -7,14 +7,14 @@
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
-<div class="signup-container">
-    <div class="image-container">
-        <img src="/images/zdjecie7.jpg" alt="Picture">
+<div class="center-container">
+    <div class="verse-text-container">
+        <h1>Dzisiejsze wiersze :)</h1>
     </div>
-    <div class="text-container">
-        <h1>Witaj na naszej stronie!</h1>
-        <p>Tutaj znajdziesz wszystkie informacje, które Cię interesują. Dowiedz się więcej o naszych usługach i
-            produkcie. Zapraszamy do eksploracji!</p>
+    <div class="random-verse-container">
+        <div class="random-verse" th:each="verse: ${verses}">
+            <a class="random-single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></a>
+        </div>
     </div>
 </div>
 </body>

@@ -27,7 +27,6 @@ public class SecurityConfig {
       "/home",
       "/signup",
       "/login/**",
-      //      "/verse/**",
       "/css/**",
       "/images/**",
       "/js/**"
