@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
     <link rel="stylesheet" th:href="@{/css/verse/verseDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/verse/popups.css}">
+
     <meta charset="UTF-8">
     <title th:text="${verse.title}"></title>
 </head>
@@ -11,14 +13,33 @@
 <div class="content-wrapper">
     <div class="verse-details-body">
         <div class="verse-container">
-            <div class="text-container">
+            <div class="verse-text-container">
                 <h1 th:text="${verse.title}"></h1>
-                <div class="poem-text">
-                    <p th:utext="${verse.text}"></p>
+                <div class="poem-box">
+                    <div class="poem-text">
+                        <p th:utext="${verse.text}"></p>
+                    </div>
+                    <div class="author-credentials">
+                        <a href="#" class="author-a" th:text="${verse.user.getName()}"></a>
+                        <a href="#" class="author-a" th:text="${verse.user.getSurname()}"></a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+<div id="popupForm" class="popup-overlay" th:replace="~{verse/deleteVersePopup :: verse(${verse})}">
+</div>
+
+<div class="action-buttons-container">
+    <div sec:authorize="isAuthenticated()" th:if="${verse.user.id == #authentication.getPrincipal().getId()}"
+         class="head-container">
+        <button class="delete-verse-button" id="delete-verse-button">Delete Verse</button>
+    </div>
+</div>
+<script th:src="@{/js/verse/verseDetails.js}"></script>
+<script th:src="@{/js/verse/popups.js}"></script>
+
 </body>
 </html>

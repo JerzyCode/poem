@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/verse/verse.css}">
@@ -8,16 +8,20 @@
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
-<div id="verseList" class="all-verses" th:each="verse: ${verses}">
-    <div class="single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></div>
+<div class="verses-row">
+    <div id="verseList" class="all-verses" th:each="verse: ${verses}">
+        <div class="single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></div>
+    </div>
 </div>
-<div id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
+
+<div sec:authorize="isAuthenticated()" id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
 </div>
-<div id="add-verse-button" class="add-button-container">
-    <a href="#" class="add-button" onclick="">+</a>
+<div sec:authorize="isAuthenticated()"
+     id="add-verse-button"
+     class="add-button-container">
+    <a class="add-button">+</a>
 </div>
 <script th:src="@{/js/verse/allVerses.js}"></script>
-<script th:src="@{/js/verse/addVersePopup.js}"></script>
 
 </body>
 </html>

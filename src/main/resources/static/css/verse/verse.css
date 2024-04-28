@@ -30,8 +30,9 @@
     border-bottom-left-radius: 8px;
 }
 
-.text-container {
+.verse-text-container {
     width: 67%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,7 +40,7 @@
 }
 
 
-.poem {
+.verse-description {
     font-style: italic;
     color: #555;
     white-space: pre-wrap;
@@ -52,9 +53,29 @@
     margin: 0;
 }
 
+.head-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
 .tile:hover {
     transform: scale(1.03);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     background-color: #eaeaea;
     border-color: #363062;
+}
+
+.author-credentials {
+    display: flex;
+}
+
+.author-p {
+    color: #333;
+    margin-right: 10px;
+    text-decoration: none
+}
+
+.author-p:last-child {
+    margin-right: 0;
 }

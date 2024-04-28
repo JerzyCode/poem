@@ -55,7 +55,7 @@ input[type="text"], textarea {
     font-family: 'Arial', sans-serif;
 }
 
-button {
+.custom-button {
     padding: 10px 20px;
     background-color: #363062;
     color: white;
@@ -66,12 +66,27 @@ button {
     transition: transform 0.3s ease-in-out, background-color 0.3s ease;
 }
 
-button:hover {
+.custom-button:hover {
     background-color: #564e96;
     transform: scale(1.05);
+}
+
+.delete-popup-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-delete-control-button {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 label {
     font-family: 'Arial', sans-serif;
     color: #666;
+}
+
+.delete-header {
+    text-align: center;
 }

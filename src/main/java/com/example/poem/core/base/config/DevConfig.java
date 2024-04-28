@@ -1,7 +1,11 @@
-package com.example.poem.core.config;
+package com.example.poem.core.base.config;
 
-import com.example.poem.core.verse.Verse;
-import com.example.poem.core.verse.VerseRepository;
+import com.example.poem.core.base.exceptions.UsernameTakenException;
+import com.example.poem.core.model.user.User;
+import com.example.poem.core.model.user.UserRole;
+import com.example.poem.core.model.verse.Verse;
+import com.example.poem.core.model.verse.VerseRepository;
+import com.example.poem.core.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -16,11 +20,19 @@ import java.util.List;
 @Slf4j
 public class DevConfig {
   private final VerseRepository repository;
+  private final UserService service;
 
   @Bean
   @Profile("mock")
-  public CommandLineRunner createMocks() {
+  public CommandLineRunner createMocks() throws UsernameTakenException {
     log.info("Created Mocks!");
+    User user = service.register(User.builder()
+        .username("test@wp.pl")
+        .name("Jerzy")
+        .surname("Boksa")
+        .password("test123")
+        .role(UserRole.USER)
+        .build());
 
     List<Verse> verseList = List.of(
         Verse.builder()
@@ -32,6 +44,7 @@ public class DevConfig {
             .title("Do Hanny")
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
+            .user(user)
             .build(),
         Verse.builder()
             .text("Wiesz, coś mi winien; mieగże się do taszki⁸,\n" +
@@ -39,6 +52,7 @@ public class DevConfig {
             .title("Do Jósta")
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
+            .user(user)
             .build()
     );
 
@@ -46,4 +60,5 @@ public class DevConfig {
 
     return args -> log.info("CREATED MOCKS!");
   }
+
 }

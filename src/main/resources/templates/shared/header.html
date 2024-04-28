@@ -1,17 +1,24 @@
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <link rel="stylesheet" th:href="@{/css/shared/header.css}"/>
     <title></title>
 </head>
 <header>
     <div th:fragment="header" class="header-container">
-        <a href="/home">
-            <h1 class="logo">Poem Blog</h1>
-        </a>
+        <div class="left-nav">
+            <a href="/home">
+                <h1 class="head-nav">Poem Blog</h1>
+            </a>
+            <a sec:authorize="isAuthenticated()"
+               th:href="@{/verses/{userId}(userId=${#authorization.getAuthentication().getPrincipal().getId()})}">
+                <h1 class="poems-nav">Your Poems</h1>
+            </a>
+        </div>
         <nav>
             <ul class="nav-links">
-                <li><a href="/verse">Login</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/signup">Sign Up</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </div>

@@ -23,19 +23,22 @@
     align-items: center;
 }
 
+.poem-text {
+    padding: 20px;
+}
 
-.text-container {
+.verse-text-container {
     width: 100%;
     text-align: center;
     margin-top: 20px;
 }
 
-.text-container h1 {
+.verse-text-container h1 {
     font-size: 24px;
     color: #333;
 }
 
-.poem-text {
+.poem-box {
     background-color: #f9f9f9;
     padding: 20px;
     font-style: italic;
@@ -51,4 +54,45 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.author-credentials {
+    float: right;
+    display: flex;
+}
+
+.author-a {
+    color: #333;
+    margin-right: 5px;
+    text-decoration: none
+}
+
+.author-a:last-child {
+    margin-right: 0;
+}
+
+.action-buttons-container {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
+.delete-verse-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #363062;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+}
+
+.delete-verse-button:hover {
+    background-color: #564e96;
+    transform: scale(1.2);
+    cursor: pointer;
 }
