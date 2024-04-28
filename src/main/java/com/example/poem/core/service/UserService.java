@@ -12,14 +12,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
   private final PasswordEncoder passwordEncoder;
-
-  public static final String USER_NAME_TAKEN = "Username Taken";
-
   private final UserRepository repository;
+  public static final String USER_NAME_TAKEN = "Username Taken";
 
   public User register(User user) throws UsernameTakenException {
     boolean existUser = repository.findUserByUsername(user.getUsername()).isPresent();
-    System.out.println(user.toString());
     if (existUser) {
       throw new UsernameTakenException(USER_NAME_TAKEN);
     }

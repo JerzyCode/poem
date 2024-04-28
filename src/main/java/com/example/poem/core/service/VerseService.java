@@ -29,7 +29,7 @@ public class VerseService {
     return verseRepository.findAllByUser(user);
   }
 
-  public Verse addVerse(VerseDTO verseDTO, Long userId) {
+  public void addVerse(VerseDTO verseDTO, Long userId) {
     User user = userRepository.findById(userId).orElseThrow();
     Verse verse = Verse.builder()
         .text(verseDTO.getText())
@@ -38,7 +38,7 @@ public class VerseService {
         .user(user)
         .title(verseDTO.getTitle())
         .build();
-    return verseRepository.save(verse);
+    verseRepository.save(verse);
   }
 
   public void deleteVerse(Long verseId) {

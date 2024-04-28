@@ -109,7 +109,8 @@
                 </executions>
                 <configuration>
                     <classes>
-                        <param>com.example.poem.core.base.authorization.dto.AuthenticationResponse</param>
+                        <param>com.example.poem.core.model.verse.Verse</param>
+
                     </classes>
                     <generateAssertionsForAllFields>true</generateAssertionsForAllFields>
                     <generateBddAssertions>false</generateBddAssertions>
