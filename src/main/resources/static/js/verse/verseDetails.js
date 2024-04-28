@@ -1,12 +1,28 @@
-document.getElementById('delete-verse-button').addEventListener('click', function () {
-    document.getElementById('popupForm').style.display = 'block';
+document.addEventListener('DOMContentLoaded', function () {
+    const deleteButton = document.getElementById('delete-verse-button');
+    if (deleteButton) {
+        deleteButton.addEventListener('click', function () {
+            document.getElementById('popupForm').style.display = 'block';
 
-    document.getElementById('confirmDeleteButton').addEventListener("click", function () {
-        const verseId = this.getAttribute('data-verse-id');
-        const userId = this.getAttribute('data-user-id');
-        deleteVerse(verseId, userId)
-    })
+            document.getElementById('confirmDeleteButton').addEventListener("click", function () {
+                const verseId = this.getAttribute('data-verse-id');
+                const userId = this.getAttribute('data-user-id');
+                deleteVerse(verseId, userId)
+            })
+        });
+    }
+
 });
+//
+// document.getElementById('delete-verse-button').addEventListener('click', function () {
+//     document.getElementById('popupForm').style.display = 'block';
+//
+//     document.getElementById('confirmDeleteButton').addEventListener("click", function () {
+//         const verseId = this.getAttribute('data-verse-id');
+//         const userId = this.getAttribute('data-user-id');
+//         deleteVerse(verseId, userId)
+//     })
+// });
 
 function deleteVerse(verseId, userId) {
     document.getElementById('popupForm').style.display = 'none';

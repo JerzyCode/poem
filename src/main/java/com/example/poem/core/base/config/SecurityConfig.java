@@ -26,6 +26,8 @@ public class SecurityConfig {
       "/h2-console/**",
       "/home",
       "/signup",
+      "/verses/**",
+      "/verse/**",
       "/login/**",
       "/css/**",
       "/images/**",

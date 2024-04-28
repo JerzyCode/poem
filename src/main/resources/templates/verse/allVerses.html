@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/verse/verse.css}">
@@ -14,9 +14,11 @@
     </div>
 </div>
 
-<div id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
+<div sec:authorize="isAuthenticated()" id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
 </div>
-<div th:if="${userId == #authentication.getPrincipal().getId()}" id="add-verse-button" class="add-button-container">
+<div sec:authorize="isAuthenticated()"
+     id="add-verse-button"
+     class="add-button-container">
     <a class="add-button">+</a>
 </div>
 <script th:src="@{/js/verse/allVerses.js}"></script>
