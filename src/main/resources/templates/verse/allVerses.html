@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div sec:authorize="isAuthenticated()" id="popupForm" class="popup-overlay" th:replace="~{verse/addVersePopup}">
+<div sec:authorize="isAuthenticated()" id="popupForm" class="popup-overlay" th:replace="~{verse/addEditVersePopup}">
 </div>
 <div sec:authorize="isAuthenticated()"
      id="add-verse-button"
@@ -22,6 +22,7 @@
     <a class="add-button">+</a>
 </div>
 <script th:src="@{/js/verse/allVerses.js}"></script>
+<script th:src="@{/js/verse/popups.js}"></script>
 
 </body>
 </html>

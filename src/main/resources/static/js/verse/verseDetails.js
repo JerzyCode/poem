@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const deleteButton = document.getElementById('delete-verse-button');
     if (deleteButton) {
         deleteButton.addEventListener('click', function () {
-            document.getElementById('popupForm').style.display = 'block';
+            document.getElementById('deletePopupForm').style.display = 'block';
 
             document.getElementById('confirmDeleteButton').addEventListener("click", function () {
                 const verseId = this.getAttribute('data-verse-id');
@@ -13,19 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
-//
-// document.getElementById('delete-verse-button').addEventListener('click', function () {
-//     document.getElementById('popupForm').style.display = 'block';
-//
-//     document.getElementById('confirmDeleteButton').addEventListener("click", function () {
-//         const verseId = this.getAttribute('data-verse-id');
-//         const userId = this.getAttribute('data-user-id');
-//         deleteVerse(verseId, userId)
-//     })
-// });
+
+document.getElementById('edit-verse-button').addEventListener('click', function () {
+    document.getElementById('popupForm').style.display = 'block';
+    document.getElementById('versePopupTitle').textContent = 'Edit Verse'
+});
+
 
 function deleteVerse(verseId, userId) {
-    document.getElementById('popupForm').style.display = 'none';
+    document.getElementById('deletePopupForm').style.display = 'none';
 
     fetch(`/rest/api/verse?verseId=${verseId}`, {
         method: 'DELETE'
@@ -39,5 +35,4 @@ function deleteVerse(verseId, userId) {
             }
         })
         .catch(error => console.error('Error:', error));
-
 }

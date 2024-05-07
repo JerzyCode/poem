@@ -29,14 +29,15 @@
 
     </div>
 </div>
-<div id="popupForm" class="popup-overlay" th:replace="~{verse/deleteVersePopup :: verse(${verse})}">
-</div>
+<div sec:authorize="isAuthenticated()" id="editPopupForm" class="popup-overlay"
+     th:replace="~{verse/addEditVersePopup}"></div>
+<div id="deletePopupForm" class="popup-overlay" th:replace="~{verse/deleteVersePopup :: verse(${verse})}"></div>
 
-<div class="action-buttons-container">
-    <div sec:authorize="isAuthenticated()" th:if="${verse.user.id == #authentication.getPrincipal().getId()}"
-         class="head-container">
-        <button class="delete-verse-button" id="delete-verse-button">Delete Verse</button>
-    </div>
+
+<div sec:authorize="isAuthenticated()" th:if="${verse.user.id == #authentication.getPrincipal().getId()}"
+     class="action-buttons-container">
+    <button class="edit-verse-button" id="delete-verse-button">Delete Verse</button>
+    <button class="edit-verse-button" id="edit-verse-button">Edit Verse</button>
 </div>
 <script th:src="@{/js/verse/verseDetails.js}"></script>
 <script th:src="@{/js/verse/popups.js}"></script>

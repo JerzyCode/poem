@@ -8,7 +8,7 @@
 <body>
 <div id="popupForm" class="popup-overlay">
     <div class="popup-content">
-        <h2>Add New Verse</h2>
+        <h2 id="versePopupTitle">Add New Verse</h2>
         <form id="verseForm"
               th:action="@{/rest/api/verse(userId=${#authorization.getAuthentication().getPrincipal().getId()})}"
               method="post" th:object="${verseDTO}">
@@ -29,7 +29,5 @@
         </form>
     </div>
 </div>
-
-<script th:src="@{/js/verse/popups.js}"></script>
 </body>
 </html>
