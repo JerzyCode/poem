@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/verse/verse.css}">
     <link rel="stylesheet" th:href="@{/css/verse/allVerses.css}">
+    <link rel="stylesheet" th:href="@{/css/verse/popups.css}">
+
     <title>All Verses</title>
 </head>
 <body>
@@ -14,7 +16,8 @@
     </div>
 </div>
 
-<div sec:authorize="isAuthenticated()" id="popupForm" class="popup-overlay" th:replace="~{verse/addEditVersePopup}">
+<div sec:authorize="isAuthenticated()" id="popupForm" class="popup-overlay"
+     th:replace="~{verse/addEditVersePopup :: addEditVersePopup(@{/rest/api/verse(userId=${#authorization.getAuthentication().getPrincipal().getId()})}, 'post')}">
 </div>
 <div sec:authorize="isAuthenticated()"
      id="add-verse-button"

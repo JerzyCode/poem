@@ -12,6 +12,9 @@
 <div th:replace="~{shared/header}"></div>
 <div class="content-wrapper">
     <div class="verse-details-body">
+        <div class="edit-result-fail" th:if="${param.fail}">
+            Can't edit poem.
+        </div>
         <div class="verse-container">
             <div class="verse-text-container">
                 <h1 th:text="${verse.title}"></h1>
@@ -30,7 +33,7 @@
     </div>
 </div>
 <div sec:authorize="isAuthenticated()" id="editPopupForm" class="popup-overlay"
-     th:replace="~{verse/addEditVersePopup}"></div>
+     th:replace="~{verse/addEditVersePopup :: addEditVersePopup(@{/rest/api/verse/edit(userId=${#authorization.getAuthentication().getPrincipal().getId()}, verseId=${verse.getId()})}, 'PUT')}"></div>
 <div id="deletePopupForm" class="popup-overlay" th:replace="~{verse/deleteVersePopup :: verse(${verse})}"></div>
 
 
@@ -41,6 +44,5 @@
 </div>
 <script th:src="@{/js/verse/verseDetails.js}"></script>
 <script th:src="@{/js/verse/popups.js}"></script>
-
 </body>
 </html>

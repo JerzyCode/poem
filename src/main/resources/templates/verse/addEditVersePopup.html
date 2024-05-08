@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Verse Details</title>
-    <link rel="stylesheet" th:href="@{/css/verse/popups.css}">
-</head>
-<body>
-<div id="popupForm" class="popup-overlay">
+<div id="popupForm" class="popup-overlay" th:fragment="addEditVersePopup(formAction, formMethod)">
     <div class="popup-content">
         <h2 id="versePopupTitle">Add New Verse</h2>
         <form id="verseForm"
-              th:action="@{/rest/api/verse(userId=${#authorization.getAuthentication().getPrincipal().getId()})}"
-              method="post" th:object="${verseDTO}">
+              th:action="@{${formAction}}" th:method="@{${formMethod}}" th:object="${verseDTO}">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required><br>
 
@@ -29,5 +20,3 @@
         </form>
     </div>
 </div>
-</body>
-</html>

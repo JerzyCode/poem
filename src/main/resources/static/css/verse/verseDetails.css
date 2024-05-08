@@ -97,3 +97,12 @@
     transform: scale(1.2);
     cursor: pointer;
 }
+
+.edit-result-fail {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: red;
+    padding-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+}

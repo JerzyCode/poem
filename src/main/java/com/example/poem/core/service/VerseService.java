@@ -1,5 +1,6 @@
 package com.example.poem.core.service;
 
+import com.example.poem.core.base.exceptions.WrongUserException;
 import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRepository;
 import com.example.poem.core.model.verse.Verse;
@@ -49,6 +50,20 @@ public class VerseService {
         .title(verseDTO.getTitle())
         .build();
     verseRepository.save(verse);
+  }
+
+  public void editVerse(VerseDTO verseDTO, Long verseId, Long userId) throws WrongUserException {
+    User user = userRepository.findById(userId).orElseThrow();
+    Verse verseToEdit = verseRepository.findById(verseId).orElseThrow();
+    if (verseToEdit.getUser() != user) {
+      throw new WrongUserException(String.format("Verse's user id=%s, but request user id =%d", verseToEdit.getUser().getId(), userId));
+    }
+    verseToEdit.setTitle(verseDTO.getTitle());
+    verseToEdit.setText(verseDTO.getText());
+    verseToEdit.setImageUrl(verseDTO.getImageUrl());
+    verseToEdit.setShortDescription(verseDTO.getShortDescription());
+    //TODO TESTY DOPISAĆ
+    verseRepository.save(verseToEdit);
   }
 
   public void deleteVerse(Long verseId) {
