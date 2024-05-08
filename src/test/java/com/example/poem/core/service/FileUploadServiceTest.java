@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileUploadServiceTest {
   private static final String FILENAME = "testFile";
+  private static final String EXE_EXT = ".exe";
   private static final Long verseId = 123L;
   private static final String verseTitle = "testVerseName";
   private FileUploadService sut;
@@ -43,7 +44,7 @@ class FileUploadServiceTest {
     byte[] content = new byte[123];
     MultipartFile file = new MockMultipartFile(
         FILENAME,
-        FILENAME + ".exe",
+        FILENAME + EXE_EXT,
         MIME_TYPE_JPG,
         content
     );
@@ -61,7 +62,7 @@ class FileUploadServiceTest {
     byte[] content = new byte[123];
     MultipartFile file = new MockMultipartFile(
         FILENAME,
-        FILENAME + ".exe",
+        FILENAME + ".jpg",
         "plain/text",
         content
     );
@@ -79,7 +80,7 @@ class FileUploadServiceTest {
     byte[] content = new byte[(int)(MAX_SIZE_BYTES + 1)];
     MultipartFile file = new MockMultipartFile(
         FILENAME,
-        FILENAME + ".exe",
+        FILENAME + ".jpg",
         "plain/text",
         content
     );
