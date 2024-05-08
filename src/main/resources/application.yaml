@@ -14,6 +14,10 @@ spring:
     mode: HTML
     encoding: UTF-8
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 6MB
+
 logging:
   level:
     org:

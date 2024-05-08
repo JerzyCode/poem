@@ -9,7 +9,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    //TODO dowiedziec sie czy ta śceiżka tak moze byc
+    registry.addResourceHandler("/images/**")
+        .addResourceLocations("file:C:\\Programowanie\\Projekty\\poem\\poem\\images/");
     registry.addResourceHandler("/**")
         .addResourceLocations("classpath:/static/");
+
   }
 }

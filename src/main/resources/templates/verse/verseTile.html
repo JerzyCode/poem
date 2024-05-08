@@ -1,8 +1,7 @@
 <div th:fragment="verse(poem)">
     <a th:href="@{/verse/{id}(id=${poem.id})}" class="tile">
         <div class="image-container">
-            <img th:src="${'/'+poem.imageUrl}"
-                 alt="Poem image"/>
+            <img th:src="@{'/'+${poem.imageUrl}}" alt="Poem image"/>
         </div>
         <div class="verse-info-container">
             <h1 th:text="${poem.title}"></h1>
