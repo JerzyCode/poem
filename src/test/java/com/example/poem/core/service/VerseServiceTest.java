@@ -1,5 +1,6 @@
 package com.example.poem.core.service;
 
+import com.example.poem.core.base.exceptions.WrongUserException;
 import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRepository;
 import com.example.poem.core.model.verse.Verse;
@@ -194,6 +195,39 @@ class VerseServiceTest {
     ListAssert.assertThatList(verses)
         .isNotNull()
         .hasSize(3);
+  }
+
+  @Test
+  @Transactional
+  void should_edit_verse() throws WrongUserException {
+    //given
+    Verse toEdit = verseRepository.save(VerseHelper.prepareVerse(user));
+    VerseDTO verseDTO = VerseHelper.prepareVerseDto();
+    verseDTO.setTitle("Changed title");
+
+    //when
+    sut.editVerse(verseDTO, toEdit.getId(), user.getId());
+
+    //then
+    Verse edited = verseRepository.findById(toEdit.getId()).orElseThrow();
+    VerseAssert.assertThat(edited)
+        .isNotNull()
+        .hasText(verseDTO.getText())
+        .hasTitle(verseDTO.getTitle())
+        .hasUser(user)
+        .hasShortDescription(verseDTO.getShortDescription());
+  }
+
+  @Test
+  void should_throw_wrong_user() {
+    //given
+    Verse toEdit = verseRepository.save(VerseHelper.prepareVerse(user));
+    User wrongUser = userRepository.save(UserHelper.prepareTestUser());
+    VerseDTO verseDTO = VerseHelper.prepareVerseDto();
+    verseDTO.setTitle("Changed title");
+
+    //when && then
+    assertThrows(WrongUserException.class, () -> sut.editVerse(verseDTO, toEdit.getId(), wrongUser.getId()));
   }
 
   User createUser() {
