@@ -3,6 +3,7 @@ package com.example.poem.core.shared.helpers;
 import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseDTO;
+import org.springframework.mock.web.MockMultipartFile;
 
 public class VerseHelper {
   private static final String IMAGE_URL = "image_url";
@@ -12,7 +13,7 @@ public class VerseHelper {
 
   public static VerseDTO prepareVerseDto() {
     return VerseDTO.builder()
-        .imageUrl(IMAGE_URL)
+        .image(new MockMultipartFile(TITLE, new byte[] {}))
         .shortDescription(SHORT_TEXT)
         .text(TEXT)
         .title(TITLE)

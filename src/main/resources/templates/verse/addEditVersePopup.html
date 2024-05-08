@@ -2,7 +2,8 @@
     <div class="popup-content">
         <h2 id="versePopupTitle">Add New Verse</h2>
         <form id="verseForm"
-              th:action="@{${formAction}}" th:method="@{${formMethod}}" th:object="${verseDTO}">
+              th:action="@{${formAction}}" th:method="@{${formMethod}}" th:object="${verseDTO}"
+              enctype="multipart/form-data">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required><br>
 
@@ -12,8 +13,8 @@
             <label for="text">Text:</label>
             <textarea id="text" name="text" required></textarea><br>
 
-            <label for="imageUrl">Image URL:</label>
-            <input type="text" id="imageUrl" name="imageUrl"><br>
+            <label for="image">Upload Image:</label>
+            <input type="file" id="image" name="image" accept=".jpg,.jpeg"><br>
 
             <input class="custom-button" type="submit" value="Submit">
             <button id="closeButton" class="custom-button" type="button">Close</button>

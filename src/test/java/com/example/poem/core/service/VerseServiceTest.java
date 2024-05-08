@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -30,6 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @ActiveProfiles("test")
 class VerseServiceTest {
+  @MockBean
+  private FileUploadService fileUploadService;
 
   @Autowired
   private VerseRepository verseRepository;
@@ -41,7 +44,7 @@ class VerseServiceTest {
   @BeforeEach
   void setUp() {
     user = createUser();
-    sut = new VerseService(verseRepository, userRepository);
+    sut = new VerseService(verseRepository, userRepository, fileUploadService);
   }
 
   @AfterEach

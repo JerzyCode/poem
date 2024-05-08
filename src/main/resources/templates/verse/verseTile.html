@@ -1,10 +1,8 @@
 <div th:fragment="verse(poem)">
     <a th:href="@{/verse/{id}(id=${poem.id})}" class="tile">
         <div class="image-container">
-            <img th:if="${poem.imageUrl != null and !poem.imageUrl.isEmpty()}" th:src="${'/'+poem.imageUrl}"
-                 alt="Obrazek do wiersza"/>
-            <img th:if="${poem.imageUrl == null or poem.imageUrl.isEmpty()}" th:src="${'images/image_not_found.jpg'}"
-                 alt="Obrazek do wiersza"/>
+            <img th:src="${'/'+poem.imageUrl}"
+                 alt="Poem image"/>
         </div>
         <div class="verse-info-container">
             <h1 th:text="${poem.title}"></h1>
