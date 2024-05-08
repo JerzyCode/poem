@@ -62,7 +62,6 @@ public class VerseService {
     verseToEdit.setText(verseDTO.getText());
     verseToEdit.setImageUrl(verseDTO.getImageUrl());
     verseToEdit.setShortDescription(verseDTO.getShortDescription());
-    //TODO TESTY DOPISAĆ
     verseRepository.save(verseToEdit);
   }
 
