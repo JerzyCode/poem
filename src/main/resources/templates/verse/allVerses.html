@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/verse/verse.css}">
+    <link rel="stylesheet" th:href="@{/css/verse/verseTile.css}">
     <link rel="stylesheet" th:href="@{/css/verse/allVerses.css}">
     <link rel="stylesheet" th:href="@{/css/verse/popups.css}">
 
@@ -12,7 +12,7 @@
 <div th:replace="~{shared/header}"></div>
 <div class="verses-row">
     <div id="verseList" class="all-verses" th:each="verse: ${verses}">
-        <div class="single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></div>
+        <div th:replace="~{verse/verseTile :: verse(${verse})}"></div>
     </div>
 </div>
 

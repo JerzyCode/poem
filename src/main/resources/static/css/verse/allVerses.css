@@ -17,10 +17,6 @@ body {
     bottom: 20px;
 }
 
-.single-verse {
-
-}
-
 .verses-row {
     display: flex;
     flex-direction: row;
