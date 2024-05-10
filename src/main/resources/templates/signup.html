@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Sign Up</title>
     <link rel="stylesheet" th:href="@{/css/signup_login.css}"/>
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
 <div class="center-container">
-    <div class="register-fail" th:if="${param.fail}">
-        Can't register, username taken, wrong email or password is less than 8 characters.
+    <div class="register-fail" th:if="${param.fail}" th:text="#{signup.message.fail}">
     </div>
-    <form id="signUpForm" class="signup-form" th:action="@{/signup}" method="post" th:object="${user}">
-        <h2>Sign Up</h2>
+    <form class="signup-form" id="signUpForm" method="post" th:action="@{/signup}" th:object="${user}">
+        <h2 th:text="#{signup.signup}"></h2>
         <div class="input-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <label for="name" th:text="#{signup.name}"></label>
+            <input id="name" name="name" required type="text">
         </div>
         <div class="input-group">
-            <label for="surname">Surname:</label>
-            <input type="text" id="surname" name="surname" required>
+            <label for="surname" th:text="#{signup.surname}"></label>
+            <input id="surname" name="surname" required type="text">
         </div>
         <div class="input-group">
-            <label for="username">Email:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="username" th:text="#{signup.email}"></label>
+            <input id="username" name="username" required type="text">
         </div>
         <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="password" th:text="#{signup.password}"></label>
+            <input id="password" name="password" required type="password">
         </div>
         <div class="input-group">
-            <input class="submit-button" type="submit" value="SignUp">
+            <input class="submit-button" th:value="#{signup.sign-up-button}" type="submit">
         </div>
     </form>
 </div>

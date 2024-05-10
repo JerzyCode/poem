@@ -12,7 +12,6 @@ import java.util.Objects;
 @Service
 @Slf4j
 public class FileUploadService {
-  //  private static final String SAVE_PATH = "/";
   protected static final String IMAGE_PATH = "images/%s.jpg";
   protected static final String NO_UPLOADED_IMAGE_PATH = "images/image_not_found.jpg";
   protected static final String MIME_TYPE_JPG = "image/jpg";
@@ -70,7 +69,6 @@ public class FileUploadService {
   }
 
   private void saveFile(String filename, byte[] bytes) throws IOException {
-    //    Files.createDirectories(path.getParent());
     Path path = Path.of(filename);
     if (Files.exists(path)) {
       Files.delete(path);

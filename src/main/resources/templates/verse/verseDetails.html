@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <link rel="stylesheet" th:href="@{/css/verse/verseDetails.css}">
@@ -12,8 +12,7 @@
 <div th:replace="~{shared/header}"></div>
 <div class="content-wrapper">
     <div class="verse-details-body">
-        <div class="edit-result-fail" th:if="${param.fail}">
-            Can't edit poem.
+        <div class="edit-result-fail" th:if="${param.fail}" th:text="#{verse.details.edit-fail-message}">
         </div>
         <div class="verse-container">
             <div class="verse-text-container">
@@ -23,8 +22,8 @@
                         <p th:utext="${verse.text}"></p>
                     </div>
                     <div class="author-credentials">
-                        <a href="#" class="author-a" th:text="${verse.user.getName()}"></a>
-                        <a href="#" class="author-a" th:text="${verse.user.getSurname()}"></a>
+                        <a class="author-a" href="#" th:text="${verse.user.getName()}"></a>
+                        <a class="author-a" href="#" th:text="${verse.user.getSurname()}"></a>
                     </div>
                 </div>
             </div>
@@ -32,15 +31,16 @@
 
     </div>
 </div>
-<div sec:authorize="isAuthenticated()" id="editPopupForm" class="popup-overlay"
+<div class="popup-overlay" id="editPopupForm" sec:authorize="isAuthenticated()"
      th:replace="~{verse/addEditVersePopup :: addEditVersePopup(@{/rest/api/verse/edit(userId=${#authorization.getAuthentication().getPrincipal().getId()}, verseId=${verse.getId()})}, 'PUT')}"></div>
-<div id="deletePopupForm" class="popup-overlay" th:replace="~{verse/deleteVersePopup :: verse(${verse})}"></div>
+<div class="popup-overlay" id="deletePopupForm" th:replace="~{verse/deleteVersePopup :: verse(${verse})}"></div>
 
 
-<div sec:authorize="isAuthenticated()" th:if="${verse.user.id == #authentication.getPrincipal().getId()}"
-     class="action-buttons-container">
-    <button class="edit-verse-button" id="delete-verse-button">Delete Verse</button>
-    <button class="edit-verse-button" id="edit-verse-button">Edit Verse</button>
+<div class="action-buttons-container" sec:authorize="isAuthenticated()"
+     th:if="${verse.user.id == #authentication.getPrincipal().getId()}">
+    <button class="edit-verse-button" id="delete-verse-button" th:text="#{verse.details.delete-button}">Delete Verse
+    </button>
+    <button class="edit-verse-button" id="edit-verse-button" th:text="#{verse.details.edit-button}">Edit Verse</button>
 </div>
 <script th:src="@{/js/verse/verseDetails.js}"></script>
 <script th:src="@{/js/verse/popups.js}"></script>

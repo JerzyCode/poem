@@ -1,23 +1,24 @@
-<div id="popupForm" class="popup-overlay" th:fragment="addEditVersePopup(formAction, formMethod)">
+<div class="popup-overlay" id="popupForm" th:fragment="addEditVersePopup(formAction, formMethod)">
     <div class="popup-content">
         <h2 id="versePopupTitle">Add New Verse</h2>
-        <form id="verseForm"
-              th:action="@{${formAction}}" th:method="@{${formMethod}}" th:object="${verseDTO}"
-              enctype="multipart/form-data">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required><br>
+        <form enctype="multipart/form-data"
+              id="verseForm" th:action="@{${formAction}}" th:method="@{${formMethod}}"
+              th:object="${verseDTO}">
+            <label for="title" th:text="#{add-edit.popup.title}"></label>
+            <input id="title" name="title" required type="text"><br>
 
-            <label for="shortDescription">Short Description:</label>
-            <input type="text" id="shortDescription" name="shortDescription" required><br>
+            <label for="shortDescription" th:text="#{add-edit.popup.short-description}"></label>
+            <input id="shortDescription" name="shortDescription" required type="text"><br>
 
-            <label for="text">Text:</label>
+            <label for="text" th:text="#{add-edit.popup.text}"></label>
             <textarea id="text" name="text" required></textarea><br>
 
-            <label for="image">Upload Image:</label>
-            <input type="file" id="image" name="image" accept=".jpg,.jpeg"><br>
+            <label for="image" th:text="#{add-edit.popup.upload-image}">Upload Image:</label>
+            <input accept=".jpg,.jpeg" id="image" name="image" type="file"><br>
 
-            <input class="custom-button" type="submit" value="Submit">
-            <button id="closeButton" class="custom-button" type="button">Close</button>
+            <input class="custom-button" th:value="#{add-edit.popup.action-button}" type="submit">
+            <button class="custom-button" id="closeButton" th:text="#{add-edit.popup.close-button}"
+                    type="button"></button>
         </form>
     </div>
 </div>

@@ -1,32 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/signup_login.css}"/>
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
 <div class="center-container">
-    <div class="register-success" th:if="${param.success}">
-        You successfully registered. Please use your credentials to log in.
-    </div>
-    <div class="login-fail" th:if="${param.error}">
-        Login or password incorrect.
-    </div>
-    <form id="loginForm" class="signup-form" th:action="@{/login}" method="post">
-        <h2>Login</h2>
+    <div class="register-success" th:if="${param.success}" th:text="#{login.message.success}"></div>
+    <div class="login-fail" th:if="${param.error}" th:text="#{login.message.fail}"></div>
+    <form class="signup-form" id="loginForm" method="post" th:action="@{/login}">
+        <h2 class="login-head" th:text="#{login.head}">Login</h2>
         <div class="input-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="username" th:text="#{login.username}"></label>
+            <input id="username" name="username" required type="text">
         </div>
         <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="password" th:text="#{login.password}"></label>
+            <input id="password" name="password" required type="password">
         </div>
         <div class="input-group">
-            <input class="submit-button" type="submit" value="Login">
+            <input class="submit-button" th:value="#{login.login-button}" type="submit">
         </div>
     </form>
 </div>
