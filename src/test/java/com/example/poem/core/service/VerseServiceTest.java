@@ -4,7 +4,6 @@ import com.example.poem.core.base.exceptions.WrongUserException;
 import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRepository;
 import com.example.poem.core.model.verse.Verse;
-import com.example.poem.core.model.verse.VerseAssert;
 import com.example.poem.core.model.verse.VerseDTO;
 import com.example.poem.core.model.verse.VerseRepository;
 import com.example.poem.core.shared.helpers.UserHelper;
@@ -25,6 +24,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
@@ -64,12 +64,11 @@ class VerseServiceTest {
 
     //then
     Verse saved = verseRepository.findAllByUser(user).get(0);
-    VerseAssert.assertThat(saved)
-        .isNotNull()
-        .hasText(verseDTO.getText())
-        .hasUser(user)
-        .hasTitle(verseDTO.getTitle())
-        .hasShortDescription(verseDTO.getShortDescription());
+    assertThat(saved).isNotNull();
+    assertThat(saved.getText()).isEqualTo(verseDTO.getText());
+    assertThat(saved.getUser()).isEqualTo(user);
+    assertThat(saved.getTitle()).isEqualTo(verseDTO.getTitle());
+    assertThat(saved.getShortDescription()).isEqualTo(verseDTO.getShortDescription());
   }
 
   @Test
@@ -92,12 +91,11 @@ class VerseServiceTest {
     Verse result = sut.getVerse(verse.getId());
 
     //then
-    VerseAssert.assertThat(result)
-        .isNotNull()
-        .hasText(verse.getText())
-        .hasUser(verse.getUser())
-        .hasTitle(verse.getTitle())
-        .hasShortDescription(verse.getShortDescription());
+    assertThat(result).isNotNull();
+    assertThat(result.getText()).isEqualTo(verse.getText());
+    assertThat(result.getUser()).isEqualTo(user);
+    assertThat(result.getTitle()).isEqualTo(verse.getTitle());
+    assertThat(result.getShortDescription()).isEqualTo(verse.getShortDescription());
   }
 
   @Test
@@ -141,12 +139,12 @@ class VerseServiceTest {
         .isNotNull()
         .hasSize(1)
         .hasSameElementsAs(List.of(verse2));
-    VerseAssert.assertThat(verses.get(0))
-        .hasUser(user)
-        .hasText(verse2.getText())
-        .hasTitle(verse2.getTitle())
-        .hasId(verse2.getId())
-        .hasShortDescription(verse2.getShortDescription());
+    assertThat(verses.get(0)).isNotNull();
+    assertThat(verses.get(0).getText()).isEqualTo(verse2.getText());
+    assertThat(verses.get(0).getUser()).isEqualTo(user);
+    assertThat(verses.get(0).getTitle()).isEqualTo(verse2.getTitle());
+    assertThat(verses.get(0).getId()).isEqualTo(verse2.getId());
+    assertThat(verses.get(0).getShortDescription()).isEqualTo(verse2.getShortDescription());
   }
 
   @Test
@@ -213,12 +211,11 @@ class VerseServiceTest {
 
     //then
     Verse edited = verseRepository.findById(toEdit.getId()).orElseThrow();
-    VerseAssert.assertThat(edited)
-        .isNotNull()
-        .hasText(verseDTO.getText())
-        .hasTitle(verseDTO.getTitle())
-        .hasUser(user)
-        .hasShortDescription(verseDTO.getShortDescription());
+    assertThat(edited).isNotNull();
+    assertThat(edited.getText()).isEqualTo(verseDTO.getText());
+    assertThat(edited.getUser()).isEqualTo(user);
+    assertThat(edited.getTitle()).isEqualTo(verseDTO.getTitle());
+    assertThat(edited.getShortDescription()).isEqualTo(verseDTO.getShortDescription());
   }
 
   @Test
