@@ -30,4 +30,13 @@ public class VerseHelper {
         .build();
   }
 
+  public static Verse prepareVerse() {
+    return Verse.builder()
+        .imageUrl(IMAGE_URL)
+        .shortDescription(SHORT_TEXT)
+        .text(TEXT)
+        .title(TITLE)
+        .build();
+  }
+
 }
