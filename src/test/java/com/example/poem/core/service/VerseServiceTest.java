@@ -1,9 +1,9 @@
 package com.example.poem.core.service;
 
+import com.example.poem.core.base.exceptions.WrongUserException;
 import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRepository;
 import com.example.poem.core.model.verse.Verse;
-import com.example.poem.core.model.verse.VerseAssert;
 import com.example.poem.core.model.verse.VerseDTO;
 import com.example.poem.core.model.verse.VerseRepository;
 import com.example.poem.core.shared.helpers.UserHelper;
@@ -17,18 +17,22 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
 class VerseServiceTest {
+  @MockBean
+  private FileUploadService fileUploadService;
 
   @Autowired
   private VerseRepository verseRepository;
@@ -40,7 +44,7 @@ class VerseServiceTest {
   @BeforeEach
   void setUp() {
     user = createUser();
-    sut = new VerseService(verseRepository, userRepository);
+    sut = new VerseService(verseRepository, userRepository, fileUploadService);
   }
 
   @AfterEach
@@ -60,12 +64,11 @@ class VerseServiceTest {
 
     //then
     Verse saved = verseRepository.findAllByUser(user).get(0);
-    VerseAssert.assertThat(saved)
-        .isNotNull()
-        .hasText(verseDTO.getText())
-        .hasUser(user)
-        .hasTitle(verseDTO.getTitle())
-        .hasShortDescription(verseDTO.getShortDescription());
+    assertThat(saved).isNotNull();
+    assertThat(saved.getText()).isEqualTo(verseDTO.getText());
+    assertThat(saved.getUser()).isEqualTo(user);
+    assertThat(saved.getTitle()).isEqualTo(verseDTO.getTitle());
+    assertThat(saved.getShortDescription()).isEqualTo(verseDTO.getShortDescription());
   }
 
   @Test
@@ -88,12 +91,11 @@ class VerseServiceTest {
     Verse result = sut.getVerse(verse.getId());
 
     //then
-    VerseAssert.assertThat(result)
-        .isNotNull()
-        .hasText(verse.getText())
-        .hasUser(verse.getUser())
-        .hasTitle(verse.getTitle())
-        .hasShortDescription(verse.getShortDescription());
+    assertThat(result).isNotNull();
+    assertThat(result.getText()).isEqualTo(verse.getText());
+    assertThat(result.getUser()).isEqualTo(user);
+    assertThat(result.getTitle()).isEqualTo(verse.getTitle());
+    assertThat(result.getShortDescription()).isEqualTo(verse.getShortDescription());
   }
 
   @Test
@@ -137,12 +139,12 @@ class VerseServiceTest {
         .isNotNull()
         .hasSize(1)
         .hasSameElementsAs(List.of(verse2));
-    VerseAssert.assertThat(verses.get(0))
-        .hasUser(user)
-        .hasText(verse2.getText())
-        .hasTitle(verse2.getTitle())
-        .hasId(verse2.getId())
-        .hasShortDescription(verse2.getShortDescription());
+    assertThat(verses.get(0)).isNotNull();
+    assertThat(verses.get(0).getText()).isEqualTo(verse2.getText());
+    assertThat(verses.get(0).getUser()).isEqualTo(user);
+    assertThat(verses.get(0).getTitle()).isEqualTo(verse2.getTitle());
+    assertThat(verses.get(0).getId()).isEqualTo(verse2.getId());
+    assertThat(verses.get(0).getShortDescription()).isEqualTo(verse2.getShortDescription());
   }
 
   @Test
@@ -194,6 +196,38 @@ class VerseServiceTest {
     ListAssert.assertThatList(verses)
         .isNotNull()
         .hasSize(3);
+  }
+
+  @Test
+  @Transactional
+  void should_edit_verse() throws WrongUserException {
+    //given
+    Verse toEdit = verseRepository.save(VerseHelper.prepareVerse(user));
+    VerseDTO verseDTO = VerseHelper.prepareVerseDto();
+    verseDTO.setTitle("Changed title");
+
+    //when
+    sut.editVerse(verseDTO, toEdit.getId(), user.getId());
+
+    //then
+    Verse edited = verseRepository.findById(toEdit.getId()).orElseThrow();
+    assertThat(edited).isNotNull();
+    assertThat(edited.getText()).isEqualTo(verseDTO.getText());
+    assertThat(edited.getUser()).isEqualTo(user);
+    assertThat(edited.getTitle()).isEqualTo(verseDTO.getTitle());
+    assertThat(edited.getShortDescription()).isEqualTo(verseDTO.getShortDescription());
+  }
+
+  @Test
+  void should_throw_wrong_user() {
+    //given
+    Verse toEdit = verseRepository.save(VerseHelper.prepareVerse(user));
+    User wrongUser = userRepository.save(UserHelper.prepareTestUser());
+    VerseDTO verseDTO = VerseHelper.prepareVerseDto();
+    verseDTO.setTitle("Changed title");
+
+    //when && then
+    assertThrows(WrongUserException.class, () -> sut.editVerse(verseDTO, toEdit.getId(), wrongUser.getId()));
   }
 
   User createUser() {

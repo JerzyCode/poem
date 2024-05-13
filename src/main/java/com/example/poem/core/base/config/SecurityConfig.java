@@ -6,11 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,9 +21,12 @@ import org.springframework.security.web.header.writers.XXssProtectionHeaderWrite
 @AllArgsConstructor
 public class SecurityConfig {
 
+  private static final String HOME = "/home";
+
   private static final String[] ALLOWED_URLS = {
+      "/assets/**",
       "/h2-console/**",
-      "/home",
+      HOME,
       "/signup",
       "/verses/**",
       "/verse/**",
@@ -37,14 +39,20 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
-        .csrf(AbstractHttpConfigurer::disable)
+        .csrf(Customizer.withDefaults())
         .authorizeHttpRequests(auth -> auth
             .requestMatchers(ALLOWED_URLS).permitAll()
             .anyRequest().authenticated())
         .formLogin(formLogin -> formLogin.loginPage("/login").permitAll()
-            .defaultSuccessUrl("/home", true)
+            .defaultSuccessUrl(HOME, true)
             .failureUrl("/login?error"))
-        .logout(LogoutConfigurer::permitAll)
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl(HOME)
+            .invalidateHttpSession(true)
+            .clearAuthentication(true)
+            .deleteCookies("JSESSIONID")
+            .permitAll())
         .headers(headers ->
             headers.xssProtection(
                 xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)

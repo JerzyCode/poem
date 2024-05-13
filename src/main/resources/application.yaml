@@ -14,6 +14,12 @@ spring:
     mode: HTML
     encoding: UTF-8
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 6MB
+  messages:
+    encoding: utf-8
+    basename: static/i18/messages
 logging:
   level:
     org:

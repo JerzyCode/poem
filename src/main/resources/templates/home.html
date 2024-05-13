@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" th:href="@{/css/home.css}"/>
-
     <title>Home</title>
 </head>
 <body>
 <div th:replace="~{shared/header}"></div>
 <div class="center-container">
     <div class="verse-text-container">
-        <h1>Dzisiejsze wiersze :)</h1>
+        <h1 th:text="#{home.today-verses}"></h1>
     </div>
     <div class="random-verse-container">
         <div class="random-verse" th:each="verse: ${verses}">
-            <a class="random-single-verse" th:replace="~{verse/singleVerse :: verse(${verse})}"></a>
+            <a th:replace="~{verse/verseTile :: verse(${verse})}"></a>
         </div>
     </div>
 </div>

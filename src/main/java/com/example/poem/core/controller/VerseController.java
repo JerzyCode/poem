@@ -1,5 +1,6 @@
 package com.example.poem.core.controller;
 
+import com.example.poem.core.base.exceptions.WrongUserException;
 import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseDTO;
 import com.example.poem.core.service.VerseService;
@@ -39,6 +40,18 @@ public class VerseController {
   public String addVerse(@ModelAttribute VerseDTO verseDTO, @RequestParam Long userId) {
     service.addVerse(verseDTO, userId);
     return String.format("redirect:/verses/%d", userId);
+  }
+
+  @PostMapping("/rest/api/verse/edit")
+  public String editVerse(@ModelAttribute VerseDTO verseDTO, @RequestParam Long verseId, @RequestParam Long userId) {
+    String result = String.format("redirect:/verse/%d", verseId);
+    try {
+      service.editVerse(verseDTO, verseId, userId);
+    }
+    catch (WrongUserException e) {
+      return result + "?fail";
+    }
+    return result;
   }
 
   @DeleteMapping("/rest/api/verse")

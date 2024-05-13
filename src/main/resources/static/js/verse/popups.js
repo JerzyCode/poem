@@ -1,17 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var closeButton = document.getElementById('closeButton');
+    const closeButton = document.getElementById('closeButton');
+    const deleteCloseButton = document.getElementById('closeDeletePopupButton');
+
     if (closeButton) {
-        closeButton.addEventListener('click', closePopup);
+        closeButton.addEventListener('click', () => closePopup(document.getElementById('popupForm')));
+    }
+
+    if (deleteCloseButton) {
+        deleteCloseButton.addEventListener('click', () => closePopup(document.getElementById('deletePopupForm')));
     }
 });
 
-function closePopup() {
-    document.getElementById('popupForm').style.display = 'none';
+function closePopup(popup) {
+    popup.style.display = 'none'
 }
 
 window.onclick = function (event) {
-    const popupForm = document.getElementById('popupForm');
-    if (event.target === popupForm) {
-        popupForm.style.display = "none";
-    }
+    const popupForms = document.getElementsByClassName('popup-overlay');
+    for (let popup of popupForms)
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
 }

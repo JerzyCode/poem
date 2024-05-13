@@ -1,0 +1,15 @@
+<div th:fragment="verse(poem)">
+    <a th:href="@{/verse/{id}(id=${poem.id})}" class="tile">
+        <div class="image-container">
+            <img th:src="@{'/'+${poem.imageUrl}}" alt="Poem image"/>
+        </div>
+        <div class="verse-info-container">
+            <h1 th:text="${poem.title}"></h1>
+            <p class="verse-tile-description" th:utext="${poem.shortDescription}"></p>
+            <div class="author-credentials">
+                <p class="author-p" th:text="${poem.user.getName()}"></p>
+                <p class="author-p" th:text="${poem.user.getSurname()}"></p>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,24 @@
+<div class="popup-overlay" id="popupForm" th:fragment="addEditVersePopup(formAction, formMethod)">
+    <div class="popup-content">
+        <h2 id="versePopupTitle"></h2>
+        <form enctype="multipart/form-data"
+              id="verseForm" th:action="@{${formAction}}" th:method="@{${formMethod}}"
+              th:object="${verseDTO}">
+            <label for="title" th:text="#{add-edit.popup.title}"></label>
+            <input id="title" name="title" required type="text"><br>
+
+            <label for="shortDescription" th:text="#{add-edit.popup.short-description}"></label>
+            <input id="shortDescription" name="shortDescription" required type="text"><br>
+
+            <label for="text" th:text="#{add-edit.popup.text}"></label>
+            <textarea id="text" name="text" required></textarea><br>
+
+            <label for="image" th:text="#{add-edit.popup.upload-image}">Upload Image:</label>
+            <input accept=".jpg,.jpeg" id="image" name="image" type="file"><br>
+
+            <input class="custom-button" th:value="#{add-edit.popup.action-button}" type="submit">
+            <button class="custom-button" id="closeButton" th:text="#{add-edit.popup.close-button}"
+                    type="button"></button>
+        </form>
+    </div>
+</div>

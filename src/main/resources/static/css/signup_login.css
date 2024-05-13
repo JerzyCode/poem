@@ -12,6 +12,11 @@
 
 }
 
+.login-head {
+    text-align: center;
+    display: flex;
+}
+
 .register-fail {
     font-family: 'Arial', sans-serif;
     font-weight: bold;

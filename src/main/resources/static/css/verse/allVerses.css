@@ -3,7 +3,7 @@ body {
     background-color: #f4f4f9;
 }
 
-.all-verses {
+.verses-tile-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,11 +17,7 @@ body {
     bottom: 20px;
 }
 
-.single-verse {
-
-}
-
-.verses-row {
+.verses-tile-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
