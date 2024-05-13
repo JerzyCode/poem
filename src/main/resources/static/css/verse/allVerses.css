@@ -17,6 +17,10 @@ body {
     bottom: 20px;
 }
 
+.verse-statistic {
+    margin-bottom: 12px;
+}
+
 .verses-tile-row {
     display: flex;
     flex-direction: row;
