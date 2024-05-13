@@ -3,6 +3,7 @@ package com.example.poem.core.model.verse;
 import com.example.poem.core.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -24,12 +25,15 @@ public class Verse {
   private User user;
 
   @NotNull
+  @Size(max = 50)
   private String title;
 
   @NotNull
+  @Size(max = 100)
   private String shortDescription;
 
   @NotNull
+  @Size(max = 50000)
   private String text;
 
   private String imageUrl;

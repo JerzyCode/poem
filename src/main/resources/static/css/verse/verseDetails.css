@@ -25,6 +25,7 @@
 
 .poem-text {
     padding: 20px;
+    word-wrap: break-word;
 }
 
 .verse-text-container {
