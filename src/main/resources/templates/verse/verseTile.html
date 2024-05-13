@@ -11,12 +11,12 @@
             </div>
             <div class="verse-statistic">
                 <p class="like-com-p">
-                    <img alt="Like" class="icon" th:src="@{/assets/like_img.png}">5
+                    <img alt="Like" class="icon" th:src="@{/assets/like_img.png}" th:text="${poem.likes}">
                 </p>
                 <p class="like-com-p">
-                    <img alt="Like" class="icon" th:src="@{/assets/comment_icon.png}">5
+                    <img alt="Like" class="icon" th:src="@{/assets/comment_icon.png}" th:text="${poem.commentsSize}">
                 </p>
-                <p class="views-p"> views: 3</p>
+                <p class="views-p" th:text="#{verse-tile.views} + ' ' + ${poem.views}"></p>
             </div>
         </div>
     </a>

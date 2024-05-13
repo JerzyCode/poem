@@ -42,6 +42,9 @@ public class DevConfig {
                 "Często wzdycha, a rzadko kiedy się rozśmieగe —\n" +
                 "Tedy nie wiesz, że prze cię moగe serce mdleగe?")
             .title("Do Hanny")
+            .likes(123)
+            .commentsSize(14)
+            .views(194292)
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
             .user(user)
@@ -50,6 +53,9 @@ public class DevConfig {
             .text("Wiesz, coś mi winien; mieగże się do taszki⁸,\n" +
                 "Bo cię wnet włożę, Jóstcie, mięǳy \uEECAaszki!")
             .title("Do Jósta")
+            .likes(51)
+            .commentsSize(17)
+            .views(5123)
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
             .user(user)

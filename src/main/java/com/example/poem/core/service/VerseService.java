@@ -48,6 +48,9 @@ public class VerseService {
         .text(verseDTO.getText())
         .shortDescription(verseDTO.getShortDescription())
         .user(user)
+        .views(0)
+        .likes(0)
+        .commentsSize(0)
         .title(verseDTO.getTitle())
         .build();
     verse = verseRepository.save(verse);

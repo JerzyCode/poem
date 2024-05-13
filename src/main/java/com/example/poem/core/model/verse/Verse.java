@@ -37,5 +37,8 @@ public class Verse {
   private String text;
 
   private String imageUrl;
+  private Integer likes;
+  private Integer commentsSize;
+  private Integer views;
 
 }
