@@ -1,6 +1,6 @@
 <div class="popup-overlay" id="popupForm" th:fragment="addEditVersePopup(formAction, formMethod)">
     <div class="popup-content">
-        <h2 id="versePopupTitle">Add New Verse</h2>
+        <h2 id="versePopupTitle"></h2>
         <form enctype="multipart/form-data"
               id="verseForm" th:action="@{${formAction}}" th:method="@{${formMethod}}"
               th:object="${verseDTO}">

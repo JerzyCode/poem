@@ -15,8 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.getElementById('edit-verse-button').addEventListener('click', function () {
+    const userLang = navigator.language.split('-')[0];
+    text = 'Edit Verse'
+    if (userLang === 'pl') {
+        text = 'Edytuj Wiersz'
+    }
     document.getElementById('popupForm').style.display = 'block';
-    document.getElementById('versePopupTitle').textContent = 'Edit Verse'
+    document.getElementById('versePopupTitle').textContent = text;
 });
 
 

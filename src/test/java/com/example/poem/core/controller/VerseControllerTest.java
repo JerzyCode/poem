@@ -143,7 +143,6 @@ class VerseControllerTest {
   void should_delete_verse() throws Exception {
     //given
     User user = UserHelper.prepareTestUser();
-    VerseDTO verseDTO = VerseHelper.prepareVerseDto();
     //when & then
     mockMvc.perform(delete("/rest/api/verse")
             .param("verseId", String.valueOf(VERSE_ID))
