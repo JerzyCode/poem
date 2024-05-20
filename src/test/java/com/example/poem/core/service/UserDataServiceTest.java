@@ -4,7 +4,11 @@ import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserData;
 import com.example.poem.core.model.user.UserDataRepository;
 import com.example.poem.core.model.user.UserRepository;
+import com.example.poem.core.model.verse.Verse;
+import com.example.poem.core.model.verse.VerseRepository;
 import com.example.poem.core.shared.helpers.UserHelper;
+import com.example.poem.core.shared.helpers.VerseHelper;
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -23,6 +29,8 @@ class UserDataServiceTest {
   private UserRepository userRepository;
   @Autowired
   private UserDataRepository userDataRepository;
+  @Autowired
+  private VerseRepository verseRepository;
   private UserDataService sut;
 
   @BeforeEach
@@ -31,6 +39,7 @@ class UserDataServiceTest {
   }
 
   @AfterEach
+  @Transactional
   void cleanUp() {
     userDataRepository.deleteAll();
     userRepository.deleteAll();
@@ -47,6 +56,38 @@ class UserDataServiceTest {
     UserData saved = userDataRepository.findById(result.getId()).orElseThrow();
     Assertions.assertThat(result.getId()).isEqualTo(saved.getId());
     Assertions.assertThat(result.getLikedVerses()).isNotNull().isEmpty();
+  }
+
+  @Test
+  void should_return_true_verse_liked_by_user() {
+    //given
+    UserData userData = prepareUserData();
+    Verse verse = verseRepository.save(VerseHelper.prepareVerse(userData.getUser()));
+    userData.getLikedVerses().add(verse);
+    userDataRepository.save(userData);
+    //when
+    boolean result = sut.isVerseLikedByUser(userData.getUser(), verse);
+    //then
+    Assertions.assertThat(result).isTrue();
+  }
+
+  @Test
+  void should_return_false_verse_liked_by_user() {
+    //given
+    UserData userData = prepareUserData();
+    Verse verse = VerseHelper.prepareVerse(userData.getUser());
+    //when
+    boolean result = sut.isVerseLikedByUser(userData.getUser(), verse);
+    //then
+    Assertions.assertThat(result).isFalse();
+  }
+
+  private UserData prepareUserData() {
+    User user = userRepository.save(UserHelper.prepareTestUser());
+    return userDataRepository.save(UserData.builder()
+        .user(user)
+        .likedVerses(new ArrayList<>())
+        .build());
   }
 
 }

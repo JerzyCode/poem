@@ -21,11 +21,10 @@ public class UserData {
   private Long id;
 
   @NotNull
-  @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
   private User user;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "verse_id")
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Verse> likedVerses;
 }

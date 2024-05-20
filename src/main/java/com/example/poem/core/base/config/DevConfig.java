@@ -5,6 +5,7 @@ import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRole;
 import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseRepository;
+import com.example.poem.core.service.UserDataService;
 import com.example.poem.core.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import java.util.List;
 @Slf4j
 public class DevConfig {
   private final VerseRepository repository;
+  private final UserDataService userDataService;
   private final UserService service;
 
   @Bean
@@ -33,6 +35,8 @@ public class DevConfig {
         .password("test123")
         .role(UserRole.USER)
         .build());
+
+    userDataService.createUserData(user);
 
     List<Verse> verseList = List.of(
         Verse.builder()

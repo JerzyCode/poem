@@ -12,12 +12,17 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
 import org.assertj.core.api.ListAssert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -26,6 +31,9 @@ import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -33,18 +41,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class VerseServiceTest {
   @MockBean
   private FileUploadService fileUploadService;
-
+  @MockBean
+  private UserDataService userDataService;
   @Autowired
   private VerseRepository verseRepository;
   @Autowired
   private UserRepository userRepository;
   private User user;
+  @Autowired
   private VerseService sut;
 
   @BeforeEach
   void setUp() {
     user = createUser();
-    sut = new VerseService(verseRepository, userRepository, fileUploadService);
   }
 
   @AfterEach
@@ -228,6 +237,23 @@ class VerseServiceTest {
 
     //when && then
     assertThrows(WrongUserException.class, () -> sut.editVerse(verseDTO, toEdit.getId(), wrongUser.getId()));
+  }
+
+  @Test
+  void should_return_is_liked_by_user() {
+    //given
+    User user = createUser();
+    Verse verse = verseRepository.save(VerseHelper.prepareVerse(user));
+    Authentication auth = new UsernamePasswordAuthenticationToken(user, null);
+    SecurityContext context = SecurityContextHolder.createEmptyContext();
+    context.setAuthentication(auth);
+    SecurityContextHolder.setContext(context);
+    when(userDataService.isVerseLikedByUser(eq(user), any())).thenReturn(true);
+    //when
+    boolean result = sut.isLikedByUser(verse.getId());
+    //then
+    Assertions.assertTrue(result);
+
   }
 
   User createUser() {
