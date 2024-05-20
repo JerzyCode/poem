@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -44,7 +43,6 @@ public class DevConfig {
                 "Tedy nie wiesz, że prze cię moగe serce mdleగe?")
             .title("Do Hanny")
             .likes(123)
-            .userLikeList(new ArrayList<>())
             .commentsSize(14)
             .views(194292)
             .shortDescription("Fraszka Jana Kochanowskiego")
@@ -57,7 +55,6 @@ public class DevConfig {
             .title("Do Jósta")
             .likes(51)
             .commentsSize(17)
-            .userLikeList(new ArrayList<>())
             .views(5123)
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")

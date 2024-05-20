@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -40,11 +41,6 @@ public class Verse {
 
   @NotNull
   private Integer likes;
-
-  @NotNull
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name= "verse_id")
-  private List<User> userLikeList;
 
   private String imageUrl;
   private Integer commentsSize;

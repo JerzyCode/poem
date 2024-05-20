@@ -49,7 +49,6 @@ public class VerseService {
         .user(user)
         .views(0)
         .likes(0)
-        .userLikeList(new ArrayList<>())
         .commentsSize(0)
         .title(verseDTO.getTitle())
         .build();
