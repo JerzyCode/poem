@@ -90,7 +90,7 @@ class UserDataServiceTest {
     Verse verse = verseRepository.save(VerseHelper.prepareVerse(userData.getUser()));
     int previousLikes = verse.getLikes();
     //when
-    sut.likeVerse(userData.getUser(), verse);
+    sut.changeVerseLikedForUser(userData.getUser(), verse, false);
     //then
     UserData updatedUserData = userDataRepository.findByUser(userData.getUser()).orElseThrow();
     Assertions.assertThat(updatedUserData).isNotNull();
@@ -110,7 +110,7 @@ class UserDataServiceTest {
     userDataRepository.save(userData);
     int previousLikes = verse.getLikes();
     //when
-    sut.unlikeVerse(userData.getUser(), verse);
+    sut.changeVerseLikedForUser(userData.getUser(), verse, true);
     //then
     UserData updatedUserData = userDataRepository.findByUser(userData.getUser()).orElseThrow();
     Assertions.assertThat(updatedUserData).isNotNull();

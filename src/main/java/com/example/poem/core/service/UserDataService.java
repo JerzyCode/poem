@@ -33,7 +33,16 @@ public class UserDataService {
     return likedVerse != null;
   }
 
-  public void likeVerse(User user, Verse verse) {
+  public void changeVerseLikedForUser(User user, Verse verse, boolean isLiked) {
+    if (isLiked) {
+      unlikeVerse(user, verse);
+    }
+    else {
+      likeVerse(user, verse);
+    }
+  }
+
+  private void likeVerse(User user, Verse verse) {
     UserData userData = userDataRepository.findByUser(user).orElseThrow();
     userData.getLikedVerses().add(verse);
     verse.setLikes(verse.getLikes() + 1);
@@ -41,7 +50,7 @@ public class UserDataService {
     userDataRepository.save(userData);
   }
 
-  public void unlikeVerse(User user, Verse verse) {
+  private void unlikeVerse(User user, Verse verse) {
     UserData userData = userDataRepository.findByUser(user).orElseThrow();
     userData.getLikedVerses().remove(verse);
     verse.setLikes(verse.getLikes() - 1);
