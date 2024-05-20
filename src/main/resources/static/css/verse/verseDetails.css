@@ -79,7 +79,7 @@
     bottom: 20px;
 }
 
-.edit-verse-button {
+.action-button {
     width: 150px;
     margin-right: 20px;
     align-items: center;
@@ -94,7 +94,28 @@
     transition: transform 0.3s ease-in-out, background-color 0.3s ease;
 }
 
-.edit-verse-button:hover {
+.like-button {
+    margin-top: 10px;
+    width: 100px;
+    height: 25px;
+}
+
+.like-button-liked {
+    margin-top: 10px;
+    width: 100px;
+    height: 25px;
+    background: #666666;
+    pointer-events: none;
+}
+
+.actions-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.action-button:hover {
     background-color: #564e96;
     transform: scale(1.2);
     cursor: pointer;

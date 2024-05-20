@@ -26,6 +26,9 @@
                         <a class="author-a" href="#" th:text="${verse.user.getSurname()}"></a>
                     </div>
                 </div>
+                <div class="actions-container">
+                    <button class="action-button like-button-liked">Like</button>
+                </div>
             </div>
         </div>
 
@@ -38,9 +41,9 @@
 
 <div class="action-buttons-container" sec:authorize="isAuthenticated()"
      th:if="${verse.user.id == #authentication.getPrincipal().getId()}">
-    <button class="edit-verse-button" id="delete-verse-button" th:text="#{verse.details.delete-button}">Delete Verse
+    <button class="action-button" id="delete-verse-button" th:text="#{verse.details.delete-button}">Delete Verse
     </button>
-    <button class="edit-verse-button" id="edit-verse-button" th:text="#{verse.details.edit-button}">Edit Verse</button>
+    <button class="action-button" id="edit-verse-button" th:text="#{verse.details.edit-button}">Edit Verse</button>
 </div>
 <script th:src="@{/js/verse/verseDetails.js}"></script>
 <script th:src="@{/js/verse/popups.js}"></script>
