@@ -46,9 +46,9 @@ public class DevConfig {
                 "Często wzdycha, a rzadko kiedy się rozśmieగe —\n" +
                 "Tedy nie wiesz, że prze cię moగe serce mdleగe?")
             .title("Do Hanny")
-            .likes(123)
-            .commentsSize(14)
-            .views(194292)
+            .likes(0)
+            .commentsSize(0)
+            .views(0)
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
             .user(user)

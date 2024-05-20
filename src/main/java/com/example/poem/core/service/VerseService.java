@@ -90,4 +90,9 @@ public class VerseService {
     return userDataService.isVerseLikedByUser(user, verse);
   }
 
+  public void addView(Verse verse) {
+    verse.setViews(verse.getViews() + 1);
+    verseRepository.save(verse);
+  }
+
 }

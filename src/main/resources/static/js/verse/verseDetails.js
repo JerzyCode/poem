@@ -69,6 +69,7 @@ function likeOrUnlikeVerse(verseId) {
     }).then(response => {
         if (response.ok) {
             switchLikeButton(isLikedByUser)
+            switchLikesCounter(isLikedByUser)
         }
     }).catch(error => console.error('Error:', error));
 }
@@ -76,19 +77,25 @@ function likeOrUnlikeVerse(verseId) {
 function switchLikeButton(isCurrentLiked) {
     let button = document.getElementById('like-button');
     let isLikedAtt = document.querySelector('[data-is-liked]')
-    let likesParagraph = document.getElementById('likes-paragraph');
 
     if (isCurrentLiked === 'true' || isCurrentLiked === true) {
         button.style.background = '#666666'
         button.textContent = 'Unlike'
         isLikedAtt.setAttribute('data-is-liked', 'false');
-        likesParagraph.textContent = `${likesParagraph.textContent.split(' ')[0]} ${parseInt(likesParagraph.textContent.split(' ')[1]) + 1}`;
 
     } else {
         button.style.background = '#363062'
         button.textContent = 'Like'
         isLikedAtt.setAttribute('data-is-liked', 'true');
-        likesParagraph.textContent = `${likesParagraph.textContent.split(' ')[0]} ${parseInt(likesParagraph.textContent.split(' ')[1]) - 1}`;
+    }
+}
 
+function switchLikesCounter(isCurrentLiked) {
+    let likesParagraph = document.getElementById('likes-paragraph');
+
+    if (isCurrentLiked === 'true' || isCurrentLiked === true) {
+        likesParagraph.textContent = `${likesParagraph.textContent.split(' ')[0]} ${parseInt(likesParagraph.textContent.split(' ')[1]) + 1}`;
+    } else {
+        likesParagraph.textContent = `${likesParagraph.textContent.split(' ')[0]} ${parseInt(likesParagraph.textContent.split(' ')[1]) - 1}`;
     }
 }

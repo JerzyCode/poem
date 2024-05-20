@@ -32,6 +32,7 @@ public class VerseController {
   @GetMapping("/verse/{id}")
   public String getVerse(Model model, @PathVariable Long id) {
     Verse verse = verseService.getVerse(id);
+    verseService.addView(verse);
     model.addAttribute("verse", verse);
     model.addAttribute("isLikedByUser", verseService.isLikedByUser(id));
     return "verse/verseDetails";
