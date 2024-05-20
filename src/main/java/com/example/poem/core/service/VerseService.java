@@ -7,6 +7,7 @@ import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseDTO;
 import com.example.poem.core.model.verse.VerseRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class VerseService {
   private final VerseRepository verseRepository;
   private final UserRepository userRepository;
   private final FileUploadService fileUploadService;
+  private final UserDataService userDataService;
 
   public Verse getVerse(Long id) {
     return verseRepository.findById(id).orElseThrow();
@@ -41,13 +43,15 @@ public class VerseService {
     return verseRepository.findAllByUser(user);
   }
 
-  //TODO refactor tych dwóch nizej bo nie ładnie wygląda
   public void addVerse(VerseDTO verseDTO, Long userId) {
     User user = userRepository.findById(userId).orElseThrow();
     Verse verse = Verse.builder()
         .text(verseDTO.getText())
         .shortDescription(verseDTO.getShortDescription())
         .user(user)
+        .views(0)
+        .likes(0)
+        .commentsSize(0)
         .title(verseDTO.getTitle())
         .build();
     verse = verseRepository.save(verse);
@@ -79,4 +83,16 @@ public class VerseService {
     Verse verse = verseRepository.findById(verseId).orElseThrow();
     verseRepository.delete(verse);
   }
+
+  public boolean isLikedByUser(Long verseId) {
+    Verse verse = verseRepository.findById(verseId).orElseThrow();
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return userDataService.isVerseLikedByUser(user, verse);
+  }
+
+  public void addView(Verse verse) {
+    verse.setViews(verse.getViews() + 1);
+    verseRepository.save(verse);
+  }
+
 }

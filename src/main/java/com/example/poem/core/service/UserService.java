@@ -29,4 +29,8 @@ public class UserService {
     return repository.findUserByUsername(username).orElseThrow();
   }
 
+  public User findById(Long id) {
+    return repository.findById(id).orElseThrow();
+  }
+
 }

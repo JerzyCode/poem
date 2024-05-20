@@ -7,8 +7,16 @@
             <h1 th:text="${poem.title}"></h1>
             <p class="verse-tile-description" th:utext="${poem.shortDescription}"></p>
             <div class="author-credentials">
-                <p class="author-p" th:text="${poem.user.getName()}"></p>
-                <p class="author-p" th:text="${poem.user.getSurname()}"></p>
+                <p class="author-p" th:text="${poem.user.getName() + ' ' + poem.user.getSurname()}"></p>
+            </div>
+            <div class="verse-statistic">
+                <p class="like-com-p">
+                    <img alt="Like" class="icon" th:src="@{/assets/like_img.png}" th:text="${poem.likes}">
+                </p>
+                <p class="like-com-p">
+                    <img alt="Like" class="icon" th:src="@{/assets/comment_icon.png}" th:text="${poem.commentsSize}">
+                </p>
+                <p class="views-p" th:text="#{verse-tile.views} + ' ' + ${poem.views}"></p>
             </div>
         </div>
     </a>

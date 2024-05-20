@@ -14,31 +14,33 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class VerseController {
 
-  private final VerseService service;
+  private final VerseService verseService;
 
   @GetMapping("/home")
   public String getRandomVersesHome(Model model) {
-    model.addAttribute("verses", service.findRandomVerses());
+    model.addAttribute("verses", verseService.findRandomVerses());
     return "home";
   }
 
   @GetMapping("/verses/{userId}")
   public String getVersesByUserId(Model model, @PathVariable Long userId) {
     model.addAttribute("userId", userId);
-    model.addAttribute("verses", service.findAllByUserId(userId));
+    model.addAttribute("verses", verseService.findAllByUserId(userId));
     return "verse/allVerses";
   }
 
   @GetMapping("/verse/{id}")
   public String getVerse(Model model, @PathVariable Long id) {
-    Verse verse = service.getVerse(id);
+    Verse verse = verseService.getVerse(id);
+    verseService.addView(verse);
     model.addAttribute("verse", verse);
+    model.addAttribute("isLikedByUser", verseService.isLikedByUser(id));
     return "verse/verseDetails";
   }
 
   @PostMapping("/rest/api/verse")
   public String addVerse(@ModelAttribute VerseDTO verseDTO, @RequestParam Long userId) {
-    service.addVerse(verseDTO, userId);
+    verseService.addVerse(verseDTO, userId);
     return String.format("redirect:/verses/%d", userId);
   }
 
@@ -46,7 +48,7 @@ public class VerseController {
   public String editVerse(@ModelAttribute VerseDTO verseDTO, @RequestParam Long verseId, @RequestParam Long userId) {
     String result = String.format("redirect:/verse/%d", verseId);
     try {
-      service.editVerse(verseDTO, verseId, userId);
+      verseService.editVerse(verseDTO, verseId, userId);
     }
     catch (WrongUserException e) {
       return result + "?fail";
@@ -56,7 +58,7 @@ public class VerseController {
 
   @DeleteMapping("/rest/api/verse")
   public ResponseEntity<Void> deleteVerse(@RequestParam Long verseId) {
-    service.deleteVerse(verseId);
+    verseService.deleteVerse(verseId);
     return ResponseEntity.ok().build();
   }
 }

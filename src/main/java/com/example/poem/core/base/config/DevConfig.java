@@ -5,6 +5,7 @@ import com.example.poem.core.model.user.User;
 import com.example.poem.core.model.user.UserRole;
 import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseRepository;
+import com.example.poem.core.service.UserDataService;
 import com.example.poem.core.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import java.util.List;
 @Slf4j
 public class DevConfig {
   private final VerseRepository repository;
+  private final UserDataService userDataService;
   private final UserService service;
 
   @Bean
@@ -34,6 +36,8 @@ public class DevConfig {
         .role(UserRole.USER)
         .build());
 
+    userDataService.createUserData(user);
+
     List<Verse> verseList = List.of(
         Verse.builder()
             .text("Chybaby nie wieǳiała, co znaczy twarz blada\n" +
@@ -42,6 +46,9 @@ public class DevConfig {
                 "Często wzdycha, a rzadko kiedy się rozśmieగe —\n" +
                 "Tedy nie wiesz, że prze cię moగe serce mdleగe?")
             .title("Do Hanny")
+            .likes(0)
+            .commentsSize(0)
+            .views(0)
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
             .user(user)
@@ -50,6 +57,9 @@ public class DevConfig {
             .text("Wiesz, coś mi winien; mieగże się do taszki⁸,\n" +
                 "Bo cię wnet włożę, Jóstcie, mięǳy \uEECAaszki!")
             .title("Do Jósta")
+            .likes(51)
+            .commentsSize(17)
+            .views(5123)
             .shortDescription("Fraszka Jana Kochanowskiego")
             .imageUrl("images/zdjecie7.jpg")
             .user(user)

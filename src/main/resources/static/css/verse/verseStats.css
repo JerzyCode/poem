@@ -1,0 +1,35 @@
+.verse-statistic p {
+    color: rgb(128, 128, 128);
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+
+}
+
+.views-p {
+    font-size: 15px;
+    color: rgb(128, 128, 128);
+    margin-left: auto;
+    margin-bottom: 0;
+}
+
+.like-com-p{
+    margin: 0;
+    height: 15px;
+    font-size: 15px;
+    padding: 0;
+}
+
+
+.icon {
+    margin-left: 5px;
+    margin-right: 5px;
+    height: auto;
+    width: 15px;
+}
+
+.verse-statistic {
+    width: 100%;
+    align-items: end;
+    display: flex;
+}

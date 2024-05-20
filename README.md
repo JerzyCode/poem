@@ -1,1 +1,1 @@
-Fix translation for AddEditVersePopup
+dodac w przyszlosci tlumaczenie do guzika like w js
