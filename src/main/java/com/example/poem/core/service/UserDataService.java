@@ -6,12 +6,14 @@ import com.example.poem.core.model.user.UserDataRepository;
 import com.example.poem.core.model.verse.Verse;
 import com.example.poem.core.model.verse.VerseRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserDataService {
   private final UserDataRepository userDataRepository;
   private final VerseRepository verseRepository;
@@ -48,6 +50,7 @@ public class UserDataService {
     verse.setLikes(verse.getLikes() + 1);
     verseRepository.save(verse);
     userDataRepository.save(userData);
+    log.debug(String.format("LikeVerse, verseId=%d", verse.getId()));
   }
 
   private void unlikeVerse(User user, Verse verse) {
@@ -56,5 +59,6 @@ public class UserDataService {
     verse.setLikes(verse.getLikes() - 1);
     verseRepository.save(verse);
     userDataRepository.save(userData);
+    log.debug(String.format("UnlikeVerse, verseId=%d", verse.getId()));
   }
 }

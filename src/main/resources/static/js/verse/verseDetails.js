@@ -12,11 +12,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const likeButton = document.getElementById('like-button');
+    if (likeButton) {
+        const verseId = document.querySelector('[verse-id]').getAttribute('verse-id');
+        let isLikedAtt = document.querySelector('[data-is-liked]').getAttribute('data-is-liked')
+        switchLikeButton(isLikedAtt)
+
+        likeButton.addEventListener("click", () => likeOrUnlikeVerse(verseId))
+    }
+
 });
 
 document.getElementById('edit-verse-button').addEventListener('click', function () {
     const userLang = navigator.language.split('-')[0];
-    text = 'Edit Verse'
+    let text = 'Edit Verse'
     if (userLang === 'pl') {
         text = 'Edytuj Wiersz'
     }
@@ -27,9 +36,14 @@ document.getElementById('edit-verse-button').addEventListener('click', function 
 
 function deleteVerse(verseId, userId) {
     document.getElementById('deletePopupForm').style.display = 'none';
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     fetch(`/rest/api/verse?verseId=${verseId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        }
     })
         .then(response => {
             if (response.ok) {
@@ -40,4 +54,37 @@ function deleteVerse(verseId, userId) {
             }
         })
         .catch(error => console.error('Error:', error));
+}
+
+function likeOrUnlikeVerse(verseId) {
+    const isLikedByUser = document.querySelector('[data-is-liked]').getAttribute('data-is-liked');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/rest/api/like?verseId=${verseId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        }
+    }).then(response => {
+        if (response.ok) {
+            switchLikeButton(isLikedByUser)
+        }
+    }).catch(error => console.error('Error:', error));
+}
+
+function switchLikeButton(isCurrentLiked) {
+    let button = document.getElementById('like-button');
+    let isLikedAtt = document.querySelector('[data-is-liked]')
+
+    if (isCurrentLiked === 'true' || isCurrentLiked === true) {
+        button.style.background = '#666666'
+        button.textContent = 'Unlike'
+        isLikedAtt.setAttribute('data-is-liked', 'false');
+
+    } else {
+        button.style.background = '#363062'
+        button.textContent = 'Like'
+        isLikedAtt.setAttribute('data-is-liked', 'true');
+    }
 }
