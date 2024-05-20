@@ -41,7 +41,6 @@ public class VerseService {
     return verseRepository.findAllByUser(user);
   }
 
-  //TODO refactor tych dwóch nizej bo nie ładnie wygląda
   public void addVerse(VerseDTO verseDTO, Long userId) {
     User user = userRepository.findById(userId).orElseThrow();
     Verse verse = Verse.builder()
@@ -50,6 +49,7 @@ public class VerseService {
         .user(user)
         .views(0)
         .likes(0)
+        .userLikeList(new ArrayList<>())
         .commentsSize(0)
         .title(verseDTO.getTitle())
         .build();

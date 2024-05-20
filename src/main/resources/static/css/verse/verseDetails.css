@@ -95,12 +95,14 @@
 }
 
 .like-button {
+    border-radius: 10px;
     margin-top: 10px;
     width: 100px;
     height: 25px;
 }
 
 .like-button-liked {
+    border-radius: 10px;
     margin-top: 10px;
     width: 100px;
     height: 25px;
