@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" th:href="@{/css/verse/verseDetails.css}">
+    <link rel="stylesheet" th:href="@{/css/verse/verseStats.css}">
     <link rel="stylesheet" th:href="@{/css/verse/popups.css}">
     <meta name="csrf-token" th:content="${_csrf.token}">
     <meta charset="UTF-8">
@@ -28,8 +29,15 @@
                 </div>
                 <div class="actions-container">
                     <button id='like-button' th:attr="data-is-liked=${isLikedByUser}, verse-id=${verse.getId()}"
-                            class="action-button like-button">Like
+                            class="action-button like-button">
                     </button>
+                    <div class="verse-statistic">
+                        <p class="like-com-p" style="margin-right: 15px"
+                           th:text="#{verse.details.likes} + ' ' + ${verse.likes}"></p>
+                        <p class="like-com-p" th:text="#{verse.details.comments} + ' ' + ${verse.commentsSize}"></p>
+                        <p class="views-p" th:text="#{verse-tile.views} + ' ' + ${verse.views}"></p>
+                    </div>
+
                 </div>
             </div>
         </div>

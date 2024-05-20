@@ -1,0 +1,1 @@
+dodac w przyszlosci tlumaczenie do guzika like w js

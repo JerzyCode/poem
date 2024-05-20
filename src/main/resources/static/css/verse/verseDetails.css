@@ -115,6 +115,10 @@
     justify-content: flex-start;
 }
 
+.like-com-p {
+    margin-left: 15px;
+}
+
 
 .action-button:hover {
     background-color: #564e96;
