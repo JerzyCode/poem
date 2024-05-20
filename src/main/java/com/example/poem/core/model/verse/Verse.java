@@ -46,4 +46,18 @@ public class Verse {
   private Integer commentsSize;
   private Integer views;
 
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null || getClass() != obj.getClass())
+      return false;
+    Verse verse = (Verse)obj;
+    return verse.getId().equals(this.id);
+  }
 }

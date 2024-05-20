@@ -35,13 +35,14 @@ class UserDataServiceTest {
 
   @BeforeEach
   void setUp() {
-    sut = new UserDataService(userDataRepository);
+    sut = new UserDataService(userDataRepository, verseRepository);
   }
 
   @AfterEach
   @Transactional
   void cleanUp() {
     userDataRepository.deleteAll();
+    verseRepository.deleteAll();
     userRepository.deleteAll();
   }
 
@@ -82,12 +83,53 @@ class UserDataServiceTest {
     Assertions.assertThat(result).isFalse();
   }
 
+  @Test
+  void should_add_verse_to_liked() {
+    //given
+    UserData userData = prepareUserData();
+    Verse verse = verseRepository.save(VerseHelper.prepareVerse(userData.getUser()));
+    int previousLikes = verse.getLikes();
+    //when
+    sut.likeVerse(userData.getUser(), verse);
+    //then
+    UserData updatedUserData = userDataRepository.findByUser(userData.getUser()).orElseThrow();
+    Assertions.assertThat(updatedUserData).isNotNull();
+    Verse likedVerse = updatedUserData.getLikedVerses().get(0);
+    Assertions.assertThat(likedVerse).isNotNull();
+    Assertions.assertThat(likedVerse.getId()).isEqualTo(verse.getId());
+    Assertions.assertThat(likedVerse.getText()).isEqualTo(verse.getText());
+    Assertions.assertThat(likedVerse.getLikes()).isEqualTo(previousLikes + 1);
+  }
+
+  @Test
+  void should_remove_verse_from_liked() {
+    //given
+    UserData userData = prepareUserData();
+    Verse verse = prepareVerse(userData.getUser());
+    userData.getLikedVerses().add(verse);
+    userDataRepository.save(userData);
+    int previousLikes = verse.getLikes();
+    //when
+    sut.unlikeVerse(userData.getUser(), verse);
+    //then
+    UserData updatedUserData = userDataRepository.findByUser(userData.getUser()).orElseThrow();
+    Assertions.assertThat(updatedUserData).isNotNull();
+    Assertions.assertThat(updatedUserData.getLikedVerses()).isEmpty();
+    Assertions.assertThat(verseRepository.findById(verse.getId()).orElseThrow().getLikes()).isEqualTo(previousLikes - 1);
+  }
+
   private UserData prepareUserData() {
     User user = userRepository.save(UserHelper.prepareTestUser());
     return userDataRepository.save(UserData.builder()
         .user(user)
         .likedVerses(new ArrayList<>())
         .build());
+  }
+
+  private Verse prepareVerse(User user) {
+    Verse verse = VerseHelper.prepareVerse(user);
+    verse.setLikes(1);
+    return verseRepository.save(verse);
   }
 
 }

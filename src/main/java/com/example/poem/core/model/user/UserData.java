@@ -25,6 +25,6 @@ public class UserData {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<Verse> likedVerses;
 }
