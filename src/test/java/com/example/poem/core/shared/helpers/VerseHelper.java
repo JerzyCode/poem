@@ -26,6 +26,9 @@ public class VerseHelper {
         .user(user)
         .shortDescription(SHORT_TEXT)
         .text(TEXT)
+        .likes(0)
+        .commentsSize(0)
+        .views(123)
         .title(TITLE)
         .build();
   }

@@ -5,6 +5,7 @@ import com.example.poem.core.base.config.SecurityConfig;
 import com.example.poem.core.base.config.WebMvcConfig;
 import com.example.poem.core.base.exceptions.UsernameTakenException;
 import com.example.poem.core.model.user.User;
+import com.example.poem.core.service.UserDataService;
 import com.example.poem.core.service.UserService;
 import com.example.poem.core.shared.helpers.UserHelper;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,8 @@ class UserControllerTest {
 
   @MockBean
   private UserService userService;
+  @MockBean
+  private UserDataService userDataService;
   @Autowired
   private MockMvc mockMvc;
 
